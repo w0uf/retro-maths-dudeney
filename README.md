@@ -2,11 +2,27 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 056, 065, 081, 082, 083, 094, 101, 130, 136, 142, 157, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 094, 101, 130, 136, 142, 157, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
+
+## 001 · A POST-OFFICE PERPLEXITY : l'arithmétique laisse deux réponses, la grammaire une
+
+Une couronne de timbres : des timbres à 2 d, six fois plus à 1 d, le reste à 2 d ½. En demi-pence, 16x + 5z = 120 n'a que **deux** solutions entières, (0, 0, 24) et (5, 30, 8). La première est exclue par l'énoncé (« donnez-moi *des* timbres à deux pence ») ; reste celle de Dudeney : 5, 30 et 8 timbres.
+
+| Fichier | Rôle |
+|---|---|
+| `001/timbres.py` | Balayage complet. Témoins : trois commandes fausses, dont (5, 30, 9), doivent être refusées. Le script de l'atelier ayant été perdu, celui-ci le refait. Instantané. |
+
+## 032 · THE EXCURSION TICKET PUZZLE : son nombre exige le double florin
+
+Payer 19 s 9 d (948 farthings) avec la monnaie courante du royaume : Dudeney annonce 458 908 622 façons sans donner sa méthode. On ne retrouve son nombre qu'en comptant le **double florin** (4 s, frappé de 1887 à 1890, jamais démonétisé) ; sans lui, on obtient 357 549 696. Son tableau de la monnaie rendue (douze pièces, du farthing au souverain) est exact aux douze lignes, et sa formule (n + 1)² pour le bronze aussi.
+
+| Fichier | Rôle |
+|---|---|
+| `032/billets.py` | Programmation dynamique sur les farthings, pour plusieurs jeux de pièces ; sa formule du bronze ; son tableau. Témoins : le calcul est recoupé par une énumération directe sur de petites sommes, et une version fautive (qui compte les ordres de paiement) doit être refusée. Environ 1 s. |
 
 ## 056 · WILSON'S POSER : huit personnes, et exactement trois façons
 
@@ -23,6 +39,14 @@ Un homme est à la fois l'oncle et le neveu d'un autre, sans aucun mariage dans 
 | `056/oncle2.py` | Ajoute les interdits d'alliance : les deux dispositions à sept tombent, il en reste trois à huit. Environ 35 s. |
 | `056/oncle3.py` | Affiche les trois dispositions, situe celle de Dudeney, et refait le compte sous quatre variantes de la loi. Environ 3 min. |
 
+## 060 · THE WAPSHAW'S WHARF MYSTERY : l'indice de la trotteuse est calibré
+
+Les aiguilles des heures et des minutes se superposent onze fois en douze heures, toutes les 12/11 h ; une seule de ces superpositions tombe entre la 49ᵉ et la 50ᵉ seconde : 4 h 21 min 49 1/11 s, la réponse de Dudeney. Les onze tombent sur des secondes espacées de 60/11, donc au plus une par seconde : n'importe quelle seconde aurait suffi. Une seule tombe sur une seconde entière (midi) : les trois aiguilles ne sont ensemble qu'à midi et à minuit.
+
+| Fichier | Rôle |
+|---|---|
+| `060/montre.py` | Les onze superpositions en fractions exactes, contrôle des angles. Témoin : 4 h 21 min 49 s pile ne doit pas passer le contrôle. Instantané. |
+
 ## 065 · THE RAILWAY STATION CLOCK : deux réponses, et un parallélisme impossible
 
 Les aiguilles sont opposées et parallèles à une diagonale d'un mur de 71 pi 9 po sur 10 pi 4 po. Elles sont opposées onze fois en douze heures ; **deux** de ces instants conviennent, images l'un de l'autre dans un miroir (le mur a deux diagonales), et Dudeney n'en donne qu'un. Surtout, le parallélisme ne peut pas être exact : il faudrait hauteur/longueur = tan(π/22), irrationnel (théorème de Niven). Son mur s'en approche à 48,6 secondes d'arc.
@@ -30,6 +54,14 @@ Les aiguilles sont opposées et parallèles à une diagonale d'un mur de 71 pi 9
 | Fichier | Rôle |
 |---|---|
 | `065/horloge.py` | Les onze instants en fractions exactes, l'écart à la diagonale, la hauteur exacte qu'il faudrait, la marge de tolérance. Témoin : un mur carré ne doit désigner aucun instant. Instantané. |
+
+## 079 · THE LOCKERS PUZZLE : son compte et sa table sont exacts, et la table dit plus qu'il ne voit
+
+Trois additions abc + def = ghi à neuf chiffres distincts. Il y a 544 additions (à l'ordre des termes près) et 115 totaux, de 356 à 981 ; le casier du milieu n'a que trois totaux possibles, les siens, et son compte de 3 072 dispositions est exact (1 × 3 × 2 classes, × 8³ échanges de colonnes). Sa table « chiffre omis → somme des chiffres du total » est exacte sur les 544 additions ; elle entraîne une loi qu'il n'énonce pas : 2·S(total) = 45 − d − 9c, donc **une retenue exactement si le chiffre omis est pair, deux s'il est impair**.
+
+| Fichier | Rôle |
+|---|---|
+| `079/casiers.py` | Recensement des additions, les trois casiers, le compte de 3 072, la clause sur le zéro, sa table et la loi des retenues. Témoins : une addition qui emploie deux fois le 5 doit être refusée, une table où l'on échange deux lignes doit être contredite. Instantané. |
 
 ## 081 · THE NINE COUNTERS : la réponse du livre n'est que troisième
 
@@ -54,6 +86,22 @@ Les chiffres 1 à 9, chacun une fois, en deux multiplications de même produit ;
 | Fichier | Rôle |
 |---|---|
 | `083/multiplication.py` | Toutes les permutations des neuf chiffres, coupées en quatre nombres de toutes les façons ; répartition des sommes ; ses deux réponses. Témoins : une égalité qui n'emploie pas les neuf chiffres doit être refusée. Environ 6 s. |
+
+## 088 · DIGITAL DIVISION : sa règle « de même le 1 » est fausse
+
+Les neuf chiffres en deux nombres dont l'un divise l'autre : 89 solutions pour les quotients 2 à 9, toutes de la forme 4 chiffres / 5 chiffres. Ses huit couples sont valides et sont bien les plus petits ; son analyse par racines numériques et ses éliminations sur le 5 et le 6 sont exactes. Mais un numérateur peut finir par 1 : 16 des 89 solutions le font, dont sa propre réponse 6381/57429 pour le quotient 9.
+
+| Fichier | Rôle |
+|---|---|
+| `088/division.py` | Toutes les solutions, ses huit couples, les racines numériques, ses règles d'élimination, les contre-exemples à la règle du 1. Témoins : deux partages faux doivent être refusés ; une force brute sur toutes les coupures possibles des neuf chiffres retrouve les mêmes 89 solutions. Instantané. |
+
+## 090 · THE CENTURY PUZZLE : onze, et cent n'a rien de privilégié
+
+100 = entier + fraction avec les neuf chiffres : il y a exactement onze écritures, ce sont exactement les siennes, et sa loi des racines numériques est exacte (les neuf chiffres font 45, donc a + b + c est multiple de 9). Sur les cibles de 1 à 200, cent n'arrive qu'au **36ᵉ rang** ; le champion est 89, avec 36 écritures, puis 71 (31) et 26 (29).
+
+| Fichier | Rôle |
+|---|---|
+| `090/siecle.py` | Recherche exhaustive, ses onze écritures, ses racines numériques, ses éliminations, le classement des cibles de 1 à 200. Témoins : trois écritures fausses (mauvais dénominateur, mauvaise valeur, chiffres répétés) doivent être refusées. Environ 40 s. La première version n'essayait que des parties entières d'un ou deux chiffres, ce qui sous-comptait les cibles au-delà de 100 et plaçait cent au 34ᵉ rang. |
 
 ## 094 · THE DIGITAL CENTURY : sa réponse est la seule
 
