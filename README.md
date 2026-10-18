@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 081, 094, 142, 164, 210, 227, 244, 252, 275, 343.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 081, 094, 142, 164, 206, 210, 227, 244, 252, 269, 275, 279, 343.
 
 Python 3 ; Pillow et NumPy pour 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -51,6 +51,14 @@ Combien de morceaux, au plus, avec six coups droits dans une tranche de pomme de
 | `164/patate.py` | Trace n coupes qui se croisent deux à deux dans le disque et compte les morceaux sur un maillage fin, sans formule : 1, 2, 4, 7, 11, 16, 22, 29 pour 0 à 7 coups. Compte aussi la gravure (16). Témoin : trois coupes par un même point doivent perdre un morceau. |
 
 Que ce soit le maximum tient en une phrase : la n-ième coupe croise au plus les n − 1 précédentes, donc traverse au plus n morceaux et en ajoute au plus n.
+
+## 206 · THE KING AND THE CASTLES : ses deux affirmations sont exactes
+
+Dix châteaux reliés par cinq murailles droites de quatre châteaux chacune ; combien de châteaux, au plus, peut-on mettre à l'abri, sans accès possible depuis le dehors sans franchir une muraille ? Dudeney répond deux, avec une seule figure. C'est le même objet que le n° 210 : un arrangement de cinq droites. Le nombre de châteaux à l'abri ne dépend que du type de la figure : 0, 1, 1, 1, 1 et 2 pour les six types. Deux est donc bien le maximum, une seule figure l'atteint (celle qui exige le damier 13 × 13 au n° 210), et l'étoile de la gravure n'en protège aucun.
+
+| Fichier | Rôle |
+|---|---|
+| `206/chateaux.py` | Tire au hasard des milliers de jeux de cinq droites, reconstruit les régions du dessin (parcours des faces, région du dehors = aire signée minimale), compte les châteaux qui ne touchent pas le dehors, et classe le tout par type. Recoupe avec les figures du n° 210. |
 
 ## 210 · THE TEN COINS : le Compas sur 13 × 13, pas 17 × 12
 
@@ -130,6 +138,23 @@ python3 -u bornes.py 4                  # long : 70 calculs de 30 min au plus
 
 Toute amélioration en dessous de 157, ou toute borne au-dessus de 121, est bienvenue.
 
+## 269 · THREE MEN IN A BOAT : un tableau parfait, deux nombres faux
+
+Quinze rameurs, sept jours, cinq canots de trois chaque jour, jamais deux fois les mêmes compagnons, jamais deux fois le même canot pour un homme, et le moins de canots possible : les quinze écolières de Kirkman, plus une couche. Son tableau est un système de Kirkman parfait (au premier jour, le texte imprime « DBF » pour DEF), et ses **10 canots sont optimaux**. Mais :
+
+- son « 455 puissance 7 » compte des bordées, pas des répartitions : un jour donné, il y a 1 401 400 façons de répartir les hommes ;
+- son « 15 567 552 000 solutions » vaut 2 × 15!/168, soit deux fois le nombre de façons de renommer les hommes de **sa propre** solution ; le nombre de systèmes de Kirkman d'ordre 15 étiquetés est **404 756 352 000** ;
+- son tableau est l'espace projectif PG(3,2) : ses 35 bordées en sont les 35 droites.
+
+| Fichier | Rôle |
+|---|---|
+| `269/rameurs.py` | Contrôle du tableau, nombre chromatique du graphe des conflits entre bordées (10, donc 10 canots au moins), 120 autres systèmes tirés au hasard (10 aussi), et le calcul de 455⁷ contre 1 401 400⁷ (environ 20 min). |
+| `269/kirkman_orbites.py` | Le nombre exact de systèmes étiquetés, par double comptage et orbites des secondes journées (environ 16 min). |
+| `269/sept_classes.py` | Contrôle par une autre route : tirages au hasard, classement par isomorphisme, groupes d'automorphismes (12, 12, 24, 24, 21, 168, 168) ; la somme des 15!/|Aut| redonne le même total (environ 7 min). |
+| `269/pg32.py` | Trouve la numérotation des hommes par les vecteurs de quatre bits qui fait de chaque bordée une droite de PG(3,2). Témoin : après un échange de Pasch, le système couvre toujours chaque paire une fois, mais n'a plus de numérotation projective. |
+
+Le passage historique « le problème peut désormais être considéré comme généralement résolu » est discuté dans l'article : le cas général n'est démontré qu'en 1968 (Ray-Chaudhuri et Wilson).
+
 ## 275 · THE SIXTEEN SHEEP : la série de Dudeney est complète, et ses dessins sont justes
 
 Seize moutons enfermés par neuf claies ; en déplaçant 2, 3, 4, 5, 6 puis 7 claies, il faut obtenir trois enclos de 6, 6 et 4 moutons. Dudeney donne six dessins, les claies déplacées en trait épais. Relus aux pixels sur la gravure de 1917, ils sont tous justes : neuf claies, enclos de 6, 6 et 4, et autant de traits épais que le numéro du dessin.
@@ -147,6 +172,14 @@ cd 275
 python3 denombre.py
 python3 relire_figures.py
 ```
+
+## 279 · THE BARRELS OF BALSAM : sa réponse et sa formule sont justes
+
+Dix tonneaux numérotés de 1 à 10 en deux rangées de cinq, les numéros croissants le long de chaque rangée et de chaque colonne : combien de façons ? Sa réponse et sa formule C(2n, n)/(n + 1) sont exactes. Ce sont les nombres de Catalan, et neuf tonneaux en trois rangées de trois donnent le même compte que dix en deux rangées de cinq.
+
+| Fichier | Rôle |
+|---|---|
+| `279/balsam.py` | Force brute sur les 10! ordres, formule des équerres jusqu'à 24 tonneaux, bijection avec le dépouillement d'un scrutin, et le cas 3 × 3. |
 
 ## 343 · EXERCISE FOR PRISONERS : 42 coups au lieu de 66
 
