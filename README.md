@@ -2,9 +2,9 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 056, 081, 082, 083, 094, 101, 130, 142, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 056, 065, 081, 082, 083, 094, 101, 130, 136, 142, 157, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
 
-Python 3 ; Pillow et NumPy pour 130, 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
+Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
 
@@ -22,6 +22,14 @@ Un homme est à la fois l'oncle et le neveu d'un autre, sans aucun mariage dans 
 | `056/oncle.py` | Énumère les familles de n personnes (un sexe chacune, des parents pris parmi les précédentes), les ramène à une forme canonique et cherche l'oncle-neveu réciproque, au sang seul. Témoins : un frère qui épouse sa sœur doit être refusé, un oncle ordinaire ne doit pas compter comme réciproque. Environ 10 s. |
 | `056/oncle2.py` | Ajoute les interdits d'alliance : les deux dispositions à sept tombent, il en reste trois à huit. Environ 35 s. |
 | `056/oncle3.py` | Affiche les trois dispositions, situe celle de Dudeney, et refait le compte sous quatre variantes de la loi. Environ 3 min. |
+
+## 065 · THE RAILWAY STATION CLOCK : deux réponses, et un parallélisme impossible
+
+Les aiguilles sont opposées et parallèles à une diagonale d'un mur de 71 pi 9 po sur 10 pi 4 po. Elles sont opposées onze fois en douze heures ; **deux** de ces instants conviennent, images l'un de l'autre dans un miroir (le mur a deux diagonales), et Dudeney n'en donne qu'un. Surtout, le parallélisme ne peut pas être exact : il faudrait hauteur/longueur = tan(π/22), irrationnel (théorème de Niven). Son mur s'en approche à 48,6 secondes d'arc.
+
+| Fichier | Rôle |
+|---|---|
+| `065/horloge.py` | Les onze instants en fractions exactes, l'écart à la diagonale, la hauteur exacte qu'il faudrait, la marge de tolérance. Témoin : un mur carré ne doit désigner aucun instant. Instantané. |
 
 ## 081 · THE NINE COUNTERS : la réponse du livre n'est que troisième
 
@@ -72,6 +80,14 @@ Deux socles cubiques inégaux dont la somme des arêtes égale la somme des volu
 | `130/socles.py` | Toutes les vérifications en fractions exactes, jusqu'au dénominateur 300 ; mesure de la gravure. Témoins : deux socles plus petits que le pied doivent être refusés, et le dénominateur 21 doit être signalé. N'imprime pas les fractions de la réponse. |
 | `130/q130.png` | La gravure du livre (transcription Gutenberg, domaine public). |
 
+## 136 · THE SULTAN'S ARMY : sa règle du facteur 2 n'est écrite qu'à moitié
+
+Le plus petit effectif rangeable en deux carrés parfaits de douze façons. Sa réponse est la plus petite, ses douze paires sont exactes et complètes, ses lois sur les premiers 4n + 1 et 4n − 1 passent. Mais sa règle « doubler ne change rien, sauf quand cela double un carré » oublie le versant symétrique : doubler le double d'un carré fait perdre une façon (50 → 100). Telle qu'il l'écrit : 316 contre-exemples sous 200 000 ; complétée : aucun.
+
+| Fichier | Rôle |
+|---|---|
+| `136/sultan.py` | Crible des décompositions jusqu'à 400 000, ses lois une à une, sa réponse et ses douze paires (le nombre n'est pas imprimé), la variante avec le carré nul. Témoins : les comptes de son texte (130, 25, 50, 15) faits à la main. Instantané. |
+
 ## 142 · THE SILK PATCHWORK : les sept découpages
 
 Un patchwork en croix de 21 carrés. Il faut garder un carré entier et découper le reste en quatre morceaux identiques, en suivant les coutures, qui forment une croix grecque. Dudeney donne un découpage ; il y en a **sept** (aux symétries du patchwork près) : trois avec le carré gardé au centre, quatre avec le carré gardé au bord.
@@ -89,6 +105,15 @@ python3 decoupages.py
 python3 planche.py planche.png        # redonne la planche au pixel près
 python3 relire.py planche.png planche.json
 ```
+
+## 157 · THE TABLE-TOP AND STOOLS : la découpe est exacte, et le maître pouvait gagner
+
+Un plateau rond découpé en huit pièces pour faire deux tabourets percés d'un trou. La découpe de Dudeney tient à un seul nombre : des cordes à R·sin(π/8). Le bois est conservé au dernier chiffre (le trou vaut (π − 2√2)R²/4), ses trois affirmations comparatives sont vraies, et la gravure montre que le maître d'école a pris un cercle intérieur de rayon R/2. Mais avec un cercle de rayon inférieur à 0,370 R, le maître aurait fait un trou plus petit que l'élève, sans changer sa méthode.
+
+| Fichier | Rôle |
+|---|---|
+| `157/tabouret.py` | Reconstruction des deux découpes, conservation du bois, intégration numérique du trou, mesure des gravures, comparaison des trous. Témoin : avec des cordes mal placées, les pièces ne se raccordent pas. Pillow et NumPy. |
+| `157/q157.png`, `157/a157b.png` | Les gravures de l'énoncé et de la solution (transcription Gutenberg, domaine public). |
 
 ## 164 · THE POTATO PUZZLE : la réponse est juste, la formule imprimée ne l'est pas
 
@@ -284,6 +309,30 @@ python3 rejeu.py
 ```
 
 Correction du 18/10/2026 : la première version de `taquin.c` comptait 2 coups de plus par paire de tuiles inversées dans une ligne, ce qui surestime quand trois tuiles sont inversées. `controle_taquin.py` l'a pris en défaut (3 positions sur 300 résolues en 18 coups au lieu de 16). Le calcul corrigé redonne les mêmes nombres pour les 9 cibles, dont 42.
+
+## 365 · NEW MEASURING PUZZLE : onze est le minimum, et le second tonneau est indispensable
+
+Deux récipients de dix pintes pleins, une mesure de 5 et une de 4 : mettre 3 pintes dans chacune des deux mesures. Ses onze transvasements sont le minimum, et il y a exactement 11 solutions en onze coups (à l'échange des deux grands récipients près). Avec un seul grand récipient, de 10 ou de 20 pintes : impossible.
+
+| Fichier | Rôle |
+|---|---|
+| `365/mesures.py` | Parcours en largeur des situations, comptage des chemins optimaux, son tableau vérifié ligne à ligne, variantes à un seul récipient. Témoin : une ligne de tableau qui ne vide ni ne remplit doit être refusée. Instantané. |
+
+## 371 · GOLD PACKING IN RUSSIA : le règlement rend la réponse unique
+
+800 lingots de 12,5 × 11 × 1 pouces dans une caisse à fond carré, remplie exactement, avec au plus douze lingots sur chant. Sa caisse est remplie exactement, avec 8 lingots sur chant. Le volume permet cinq côtés ; deux sont impossibles par un argument élémentaire, et les deux autres se remplissent aussi, mais avec 96 lingots sur chant chacun. Sans la clause du règlement, le problème aurait trois solutions.
+
+| Fichier | Rôle |
+|---|---|
+| `371/lingots.py` | Remplissages vérifiés case par case sur une grille au demi-pouce, côtés possibles, preuves d'impossibilité, caisses rivales. Témoins : un lingot retiré, puis un lingot décalé, doivent faire échouer le remplissage. Instantané. |
+
+## 377 · STEALING THE CASTLE TREASURE : onze coups, et tout tient à une incise
+
+Une poulie, deux paniers, l'homme (195 lb), le jeune homme (105), le garçon (90) et le coffre (75), écart maximal 15 lb pour un humain qui descend. Onze manipulations est bien le minimum, et il y a 8 suites optimales. Si la limite valait aussi pour le coffre descendant seul, ce serait impossible : tout tient à l'incise « quoiqu'elle n'abîmât pas le bien volé ». La règle de chargement, elle, ne change rien.
+
+| Fichier | Rôle |
+|---|---|
+| `377/panier.py` | Parcours en largeur sous trois lectures de la règle, sa suite vérifiée coup par coup, comptage des suites optimales, variante sans règle de chargement. Témoin : l'homme qui descend seul doit être refusé. Instantané. |
 
 ## Licence
 
