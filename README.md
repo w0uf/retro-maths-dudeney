@@ -2,11 +2,26 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 081, 094, 142, 164, 206, 210, 227, 244, 252, 269, 275, 279, 343.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 056, 081, 094, 101, 130, 142, 164, 206, 210, 227, 244, 252, 269, 275, 279, 343.
 
-Python 3 ; Pillow et NumPy pour 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
+Python 3 ; Pillow et NumPy pour 130, 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
+
+## 056 · WILSON'S POSER : huit personnes, et exactement trois façons
+
+Un homme est à la fois l'oncle et le neveu d'un autre, sans aucun mariage dans les degrés prohibés. Dudeney donne une disposition, « la plus simple », et ajoute qu'« il y en a d'autres ». Le recensement de toutes les familles possibles répond :
+
+- au sang seul, **sept** personnes suffiraient (deux dispositions, aucune à six), mais toutes deux exigent un mariage prohibé par alliance (la femme de son père, ou la fille de sa femme) ;
+- avec la loi complète, il en faut **huit**, et il y a **trois** dispositions essentiellement différentes : la sienne (deux hommes épousent chacun la mère de l'autre), son reflet (deux hommes épousent chacun la fille de l'autre) et une troisième, mixte ;
+- le résultat ne change pas selon que la sœur de l'épouse ou la veuve du frère sont permises ou non ;
+- sans demi-frères, aucune solution jusqu'à huit personnes.
+
+| Fichier | Rôle |
+|---|---|
+| `056/oncle.py` | Énumère les familles de n personnes (un sexe chacune, des parents pris parmi les précédentes), les ramène à une forme canonique et cherche l'oncle-neveu réciproque, au sang seul. Témoins : un frère qui épouse sa sœur doit être refusé, un oncle ordinaire ne doit pas compter comme réciproque. Environ 10 s. |
+| `056/oncle2.py` | Ajoute les interdits d'alliance : les deux dispositions à sept tombent, il en reste trois à huit. Environ 35 s. |
+| `056/oncle3.py` | Affiche les trois dispositions, situe celle de Dudeney, et refait le compte sous quatre variantes de la loi. Environ 3 min. |
 
 ## 081 · THE NINE COUNTERS : la réponse du livre n'est que troisième
 
@@ -23,6 +38,23 @@ Placer des signes entre 1 2 3 4 5 6 7 8 9, sans changer l'ordre, pour faire 100,
 | Fichier | Rôle |
 |---|---|
 | `094/century.py` | Le recensement complet, calculé en fractions exactes. Il signale aussi une coquille de la transcription Gutenberg : la ligne « 123 + 4 − 5 + 67 − 8 − 9 » vaut 172 ; Dudeney avait écrit 123 + 4 − 5 + 67 − 89. |
+
+## 101 · THE TRUSSES OF HAY : l'appariement est bien inutile, sauf avec quatre bottes
+
+Cinq bottes pesées deux à deux de toutes les façons : dix nombres, sans savoir quelle pesée va avec quelle paire. Dudeney a raison, les cinq poids sont déterminés. Ce n'est pas vrai pour tout nombre de bottes : l'ambiguïté frappe 2, 4 et 8 bottes, les puissances de deux (Selfridge et Straus, 1958). Cinq pesées bien choisies suffiraient : 162 des 252 choix, ceux dont les paires relient toutes les bottes et ferment un cycle impair. Et parmi 80 erreurs de lecture simulées, une seule passe inaperçue : 115 lu 119.
+
+| Fichier | Rôle |
+|---|---|
+| `101/bottes.py` | Reconstruction exhaustive puis en fractions exactes ; balayage de 2 à 8 bottes, éprouvé d'abord sur le témoin {1, 4, 6, 7} / {2, 3, 5, 8} ; les 252 choix de cinq pesées, deux critères comparés ; les 80 erreurs simulées. Instantané. |
+
+## 130 · THE SCULPTOR'S PROBLEM : sa recette oublie une condition
+
+Deux socles cubiques inégaux dont la somme des arêtes égale la somme des volumes. L'équation se réduit à x² − xy + y² = 1. La réponse de Dudeney est bien la plus petite (plus petit dénominateur 7, deux solutions à ce dénominateur), ses deux remarques préalables sont justes, sa loi des dénominateurs aussi. Mais sa recette à trois générateurs a > b > c ne marche que si **a = b + c** : sur 9 139 triplets, 8 774 ne donnent rien. Son exemple « plein de neuf » respecte la condition. Et la gravure dessine deux socles dans le rapport 1,27, quand la réponse exige 2,67.
+
+| Fichier | Rôle |
+|---|---|
+| `130/socles.py` | Toutes les vérifications en fractions exactes, jusqu'au dénominateur 300 ; mesure de la gravure. Témoins : deux socles plus petits que le pied doivent être refusés, et le dénominateur 21 doit être signalé. N'imprime pas les fractions de la réponse. |
+| `130/q130.png` | La gravure du livre (transcription Gutenberg, domaine public). |
 
 ## 142 · THE SILK PATCHWORK : les sept découpages
 
