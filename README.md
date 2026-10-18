@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 081, 142, 227, 244, 252, 275, 343.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 081, 094, 142, 164, 210, 227, 244, 252, 275, 343.
 
 Python 3 ; Pillow et NumPy pour 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -15,6 +15,14 @@ Les chiffres 1 à 9, chacun une fois : (trois chiffres) × (deux chiffres) = (de
 | Fichier | Rôle |
 |---|---|
 | `081/jetons.py` | Essaie les 362 880 façons de poser les jetons, puis refait le compte par une seconde méthode (en partant des paires de deux chiffres) ; les deux doivent s'accorder. |
+
+## 094 · THE DIGITAL CENTURY : sa réponse est la seule
+
+Placer des signes entre 1 2 3 4 5 6 7 8 9, sans changer l'ordre, pour faire 100, avec le moins de signes possible. Dudeney trouve 123 − 45 − 67 + 89 et « ne pense pas qu'elle soit jamais battue ». Le recensement des 390 625 dispositions (rien, +, −, ×, ÷ entre deux chiffres, sans parenthèses) le confirme : 101 expressions valent 100, et **une seule** n'a que trois signes, la sienne. À quatre signes, il y en a exactement deux.
+
+| Fichier | Rôle |
+|---|---|
+| `094/century.py` | Le recensement complet, calculé en fractions exactes. Il signale aussi une coquille de la transcription Gutenberg : la ligne « 123 + 4 − 5 + 67 − 8 − 9 » vaut 172 ; Dudeney avait écrit 123 + 4 − 5 + 67 − 89. |
 
 ## 142 · THE SILK PATCHWORK : les sept découpages
 
@@ -33,6 +41,28 @@ python3 decoupages.py
 python3 planche.py planche.png        # redonne la planche au pixel près
 python3 relire.py planche.png planche.json
 ```
+
+## 164 · THE POTATO PUZZLE : la réponse est juste, la formule imprimée ne l'est pas
+
+Combien de morceaux, au plus, avec six coups droits dans une tranche de pomme de terre ? Dudeney répond 22, et c'est juste. Mais la formule qu'il imprime, (n(n+1)+1)/2, donne 21,5 pour six coups : il manque 1 au numérateur, la bonne est (n(n+1)+2)/2. Et la gravure, six coups en quadrillage, ne fait que 16 morceaux, ce que cinq coups bien placés donnent déjà.
+
+| Fichier | Rôle |
+|---|---|
+| `164/patate.py` | Trace n coupes qui se croisent deux à deux dans le disque et compte les morceaux sur un maillage fin, sans formule : 1, 2, 4, 7, 11, 16, 22, 29 pour 0 à 7 coups. Compte aussi la gravure (16). Témoin : trois coupes par un même point doivent perdre un morceau. |
+
+Que ce soit le maximum tient en une phrase : la n-ième coupe croise au plus les n − 1 précédentes, donc traverse au plus n morceaux et en ajoute au plus n.
+
+## 210 · THE TEN COINS : le Compas sur 13 × 13, pas 17 × 12
+
+Dix pièces en cinq lignes droites de quatre. Une telle figure est un arrangement de cinq droites : on énumère les droites du damier, pas les quadruplets de points. Dudeney classe six figures fondamentales et donne, d'après son carnet, le plus petit damier qui porte chacune ; pour le Compas, 17 × 12, en ajoutant « on peut les battre, mais je ne le crois pas ». Le balayage des damiers jusqu'à 13 × 13 trouve bien six types, et **le Compas tient sur 13 × 13** (169 cases contre 204). Le damier 8 × 8 porte trois types, quand il n'en nomme qu'un.
+
+| Fichier | Rôle |
+|---|---|
+| `210/dix4.py` | Les droites d'un damier, les arrangements de cinq droites dont les dix points tombent sur des cases, le type de chaque figure. |
+| `210/dix5.py` | Balaie les damiers de 4 × 4 à 13 × 13 et donne, pour chaque type, les plus petits damiers qui le portent (environ 50 s). |
+| `210/verifie.py` | Contrôle indépendant des 14 307 figures du damier 13 × 13 : dix cases distinctes, cinq alignements de quatre et pas d'autre. Témoin : une pièce déplacée d'une case doit être refusée. |
+
+Réserve : le balayage s'arrête aux damiers de côtés 13 au plus.
 
 ## 227 · CENTRAL SOLITAIRE : 18 coups au lieu de 19
 
