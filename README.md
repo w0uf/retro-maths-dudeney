@@ -81,12 +81,13 @@ python3 -u bornes.py 4                  # long : 70 calculs de 30 min au plus
 
 Toute amélioration en dessous de 157, ou toute borne au-dessus de 121, est bienvenue.
 
-## 275 · THE SIXTEEN SHEEP : les six dessins du corrigé sont justes
+## 275 · THE SIXTEEN SHEEP : la série de Dudeney est complète, et ses dessins sont justes
 
 Seize moutons enfermés par neuf claies ; en déplaçant 2, 3, 4, 5, 6 puis 7 claies, il faut obtenir trois enclos de 6, 6 et 4 moutons. Dudeney donne six dessins, les claies déplacées en trait épais. Relus aux pixels sur la gravure de 1917, ils sont tous justes : neuf claies, enclos de 6, 6 et 4, et autant de traits épais que le numéro du dessin.
 
 | Fichier | Rôle |
 |---|---|
+| `275/denombre.py` | Essaie toutes les façons de poser neuf claies (environ 40 s) : 88 dessins font des enclos de 6, 6 et 4, avec 2 à 7 claies déplacées (2, 6, 12, 24, 28 et 16 dessins). |
 | `275/figures_du_livre.png` | Les six dessins du corrigé (gravure du livre, domaine public). |
 | `275/relire_figures.py` | Mesure l’encre de chaque cloison, reconstitue les enclos et juge chaque dessin. Deux témoins doivent être refusés : le départ lui-même, et le dessin 2 avec une claie effacée. |
 
@@ -94,6 +95,7 @@ Pour les dessins 4 et 6, le bord du carré est donné à la main dans le script 
 
 ```sh
 cd 275
+python3 denombre.py
 python3 relire_figures.py
 ```
 
