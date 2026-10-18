@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 056, 081, 094, 101, 130, 142, 164, 206, 210, 227, 244, 252, 269, 275, 279, 343.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 056, 081, 082, 083, 094, 101, 130, 142, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343.
 
 Python 3 ; Pillow et NumPy pour 130, 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -30,6 +30,22 @@ Les chiffres 1 à 9, chacun une fois : (trois chiffres) × (deux chiffres) = (de
 | Fichier | Rôle |
 |---|---|
 | `081/jetons.py` | Essaie les 362 880 façons de poser les jetons, puis refait le compte par une seconde méthode (en partant des paires de deux chiffres) ; les deux doivent s'accorder. |
+
+## 082 · THE TEN COUNTERS : ses deux réponses sont les deux bouts
+
+Les jetons 0 à 9, chacun une fois, répartis entre deux multiplications de même produit ; le plus petit et le plus grand produit. Le partage est forcé, cinq jetons de chaque côté, ce que Dudeney ne dit pas : avec 4 et 6, ou 3 et 7, ou 2 et 8, les produits possibles des deux côtés ne se recouvrent jamais. Il y a 210 dispositions et 144 produits ; ses deux réponses sont exactement le plus petit et le plus grand, et chacune s'écrit de deux façons (le zéro final peut passer d'un facteur à l'autre).
+
+| Fichier | Rôle |
+|---|---|
+| `082/jetons.py` | Le partage forcé, toutes les solutions, ses deux réponses, son raisonnement sur le plus petit produit (8 couples n, 2n possibles, le sien est le premier). Témoin : une disposition à deux zéros doit être refusée. Environ 6 s. |
+
+## 083 · DIGITAL MULTIPLICATION : la somme maximale n'est pas 27 mais 30
+
+Les chiffres 1 à 9, chacun une fois, en deux multiplications de même produit ; la plus petite et la plus grande somme des chiffres du produit. Il y a 59 solutions. Sa somme minimale (6) est juste et unique. Sa maximale ne l'est pas : il annonce 27 (9 × 654 = 18 × 327 = 5 886), or **7 × 984 = 56 × 123 = 6 888** donne **30**, et elle est unique elle aussi.
+
+| Fichier | Rôle |
+|---|---|
+| `083/multiplication.py` | Toutes les permutations des neuf chiffres, coupées en quatre nombres de toutes les façons ; répartition des sommes ; ses deux réponses. Témoins : une égalité qui n'emploie pas les neuf chiffres doit être refusée. Environ 6 s. |
 
 ## 094 · THE DIGITAL CENTURY : sa réponse est la seule
 
@@ -83,6 +99,14 @@ Combien de morceaux, au plus, avec six coups droits dans une tranche de pomme de
 | `164/patate.py` | Trace n coupes qui se croisent deux à deux dans le disque et compte les morceaux sur un maillage fin, sans formule : 1, 2, 4, 7, 11, 16, 22, 29 pour 0 à 7 coups. Compte aussi la gravure (16). Témoin : trois coupes par un même point doivent perdre un morceau. |
 
 Que ce soit le maximum tient en une phrase : la n-ième coupe croise au plus les n − 1 précédentes, donc traverse au plus n morceaux et en ajoute au plus n.
+
+## 194 · THE GARDEN WALLS : chacun a autant de mur que le champ entier
+
+Un champ circulaire, quatre chaumières sur un diamètre, trois murs ; même surface et même longueur de mur pour chacun. Sa construction (chaque mur fait de deux demi-cercles, de rayons k·R/4 et (4 − k)·R/4) donne bien quatre jardins égaux. Ce qu'il ne dit pas : les trois murs mesurent tous πR, et chaque locataire dispose de 2πR de mur, le périmètre du champ entier.
+
+| Fichier | Rôle |
+|---|---|
+| `194/murs.py` | Longueurs des murs, et aire de chaque jardin mesurée sur un quadrillage de 3 000 × 3 000. Témoin : avec deux demi-cercles de même rayon, les aires doivent être refusées comme inégales. Environ 4 s. |
 
 ## 206 · THE KING AND THE CASTLES : ses deux affirmations sont exactes
 
@@ -170,6 +194,25 @@ python3 -u bornes.py 4                  # long : 70 calculs de 30 min au plus
 
 Toute amélioration en dessous de 157, ou toute borne au-dessus de 121, est bienvenue.
 
+## 263 · KING ARTHUR'S KNIGHTS : sa solution est la seule
+
+Arthur et six chevaliers, trois soirs, jamais deux fois le même voisin ; le premier soir en ordre alphabétique, puis Beleobus le plus près possible d'Arthur et Galahad le plus loin. Trois soirs de sept voisinages font 21 paires, toutes celles de sept convives : chaque paire sert exactement une fois. Huit arrangements seulement évitent toute répétition, et **un seul** met Beleobus à deux places et Galahad à trois les deux soirs : le sien.
+
+| Fichier | Rôle |
+|---|---|
+| `263/arthur.py` | Les 360 dispositions de la table, les couples de soirées sans voisin répété, le critère d'Arthur pris au pire des deux soirs. Témoin : une soirée qui reprend un voisinage du premier soir doit être refusée. Instantané. |
+
+## 266 · A TENNIS TOURNAMENT : son défi à huit couples relevé, six couples impossible
+
+Double mixte, quatre couples, deux courts, trois jours, personne ne joue deux fois avec ni contre la même personne. La grille de Dudeney est juste, et sa perfection est forcée : les comptes tombent au bord (12 partenariats sur 12, 24 oppositions sur 24), donc personne ne peut jamais jouer avec ni contre son conjoint. Il lance un défi : huit couples, quatre courts, sept jours. Une grille existe ; elle est dans `266/tennis8.json`. Le schéma tournant qui marche à quatre échoue à huit, et **six couples est impossible**. Dix couples : non conclu.
+
+| Fichier | Rôle |
+|---|---|
+| `266/tennis.py` | Audit de sa grille, puis essai du schéma tournant à huit couples (échoue, sur les 105 appariements). |
+| `266/tennis8.py` | Recherche générale à huit couples ; écrit `tennis8.json`. Environ 15 s. |
+| `266/verifie.py` | Vérificateur indépendant, sans code commun avec la recherche, appliqué à sa grille et à `tennis8.json`. Témoins : deux dames échangées entre deux courts, et un jour rejoué, doivent être refusés. |
+| `266/tennisn.py` | La même recherche pour 4, 6, 8 et 10 couples : 6 est impossible (recherche complète, 0,1 s), 10 épuise son budget de 40 millions de nœuds sans conclure (environ 5 min). |
+
 ## 269 · THREE MEN IN A BOAT : un tableau parfait, deux nombres faux
 
 Quinze rameurs, sept jours, cinq canots de trois chaque jour, jamais deux fois les mêmes compagnons, jamais deux fois le même canot pour un homme, et le moins de canots possible : les quinze écolières de Kirkman, plus une couche. Son tableau est un système de Kirkman parfait (au premier jour, le texte imprime « DBF » pour DEF), et ses **10 canots sont optimaux**. Mais :
@@ -204,6 +247,14 @@ cd 275
 python3 denombre.py
 python3 relire_figures.py
 ```
+
+## 276 · THE EIGHT VILLAS : tout est juste, et 365 à symétrie près
+
+Huit villas autour d'un carré, neuf occupants par côté. Son total (2 035), son détail coin par coin et sa formule générale (n² + 3n + 2)(n² + 3n + 3)/6 sont exacts. La démonstration qu'il ne donne pas : en groupant selon le plus grand de deux coins opposés, le total vaut Σ (2k + 1)(n + 1 − k)². Et à rotation et reflet près, il reste **365** arrangements.
+
+| Fichier | Rôle |
+|---|---|
+| `276/villas.py` | Force brute jusqu'à n = 15 contre sa formule et sa table, son détail coin par coin, la somme qui donne la formule, Burnside et énumération directe des orbites. Témoins : une formule altérée doit être rejetée ; pour n = 1, 7 arrangements et 3 à symétrie près, comptés à la main. Instantané. |
 
 ## 279 · THE BARRELS OF BALSAM : sa réponse et sa formule sont justes
 
