@@ -2,11 +2,48 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 142, 244, 252, 275.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 081, 142, 227, 244, 252, 275, 343.
 
-Python 3 ; Pillow et NumPy pour 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244.
+Python 3 ; Pillow et NumPy pour 142 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
+
+## 081 · THE NINE COUNTERS : la réponse du livre n'est que troisième
+
+Les chiffres 1 à 9, chacun une fois : (trois chiffres) × (deux chiffres) = (deux chiffres) × (deux chiffres), produit le plus grand possible. Le livre donne 5 568 (174 × 32 = 58 × 96). Il n'y a que **11** produits possibles ; le plus grand est **7 448 = 532 × 14 = 76 × 98**, et 7 008 = 584 × 12 = 73 × 96 bat aussi le livre.
+
+| Fichier | Rôle |
+|---|---|
+| `081/jetons.py` | Essaie les 362 880 façons de poser les jetons, puis refait le compte par une seconde méthode (en partant des paires de deux chiffres) ; les deux doivent s'accorder. |
+
+## 142 · THE SILK PATCHWORK : les sept découpages
+
+Un patchwork en croix de 21 carrés. Il faut garder un carré entier et découper le reste en quatre morceaux identiques, en suivant les coutures, qui forment une croix grecque. Dudeney donne un découpage ; il y en a **sept** (aux symétries du patchwork près) : trois avec le carré gardé au centre, quatre avec le carré gardé au bord.
+
+| Fichier | Rôle |
+|---|---|
+| `142/decoupages.py` | Énumère tous les découpages et retrouve celui du livre. Sans dépendance. |
+| `142/planche.py` | Dessine la planche des sept découpages directement à partir du calcul (Pillow, police DejaVu). |
+| `142/planche.png`, `142/planche.json` | La planche publiée sur le blog (composée pour la série, **pas une figure du livre**) et la position de ses panneaux. |
+| `142/relire.py` | Relit la planche aux pixels seuls : reconstitue les morceaux de chaque panneau, vérifie qu’ils redonnent le calcul et que les sept sont distincts. Témoin : une coupe effacée doit faire refuser le panneau. |
+
+```sh
+cd 142
+python3 decoupages.py
+python3 planche.py planche.png        # redonne la planche au pixel près
+python3 relire.py planche.png planche.json
+```
+
+## 227 · CENTRAL SOLITAIRE : 18 coups au lieu de 19
+
+Le solitaire anglais à 33 trous, trou central vide au départ, une seule bille au centre à la fin, en le moins de coups possible (un coup = une bille qui enchaîne des sauts). Dudeney en fait 19 et ne pense pas qu'on puisse descendre plus bas ; **18 suffisent**. La littérature attribue les 18 coups à Ernest Bergholt, vers 1912 (non vérifié dans les sources d'époque). 17 est-il possible ? Question ouverte ici.
+
+| Fichier | Rôle |
+|---|---|
+| `227/plateau.py` | Le plateau dans la numérotation de Dudeney et un vérificateur qui ne connaît que les règles. |
+| `227/rejeu.py` | Rejoue les 19 coups de Dudeney et les 18 coups, saut par saut. Témoin : deux coups permutés doivent être refusés. |
+
+La solution a été trouvée par « rencontre au milieu » (recherche en arrière sur 6 coups depuis la bille finale, en avant sur 12 depuis le départ) ; ce programme de recherche n'a pas été conservé. Ce qui est établi ici, c'est que la suite de 18 coups est valide.
 
 ## 244 · THE FIFTEEN TURNINGS : quand Python bat Dudeney
 
@@ -41,24 +78,6 @@ Usage du programme C : `verif_244 <tournants> <seuil> [affichage]` compte les tr
 Maxima obtenus : 5 tournants → 38 (l’exemple de Dudeney en fait 37), 6 → 43, 7 → 48, 8 → 53, 13 → 70, 14 → 73, 15 → 76.
 
 Nous ne savons pas si ce dépassement du livre a déjà été publié ailleurs. Signalez-le-nous si c’est le cas.
-
-## 142 · THE SILK PATCHWORK : les sept découpages
-
-Un patchwork en croix de 21 carrés. Il faut garder un carré entier et découper le reste en quatre morceaux identiques, en suivant les coutures, qui forment une croix grecque. Dudeney donne un découpage ; il y en a **sept** (aux symétries du patchwork près) : trois avec le carré gardé au centre, quatre avec le carré gardé au bord.
-
-| Fichier | Rôle |
-|---|---|
-| `142/decoupages.py` | Énumère tous les découpages et retrouve celui du livre. Sans dépendance. |
-| `142/planche.py` | Dessine la planche des sept découpages directement à partir du calcul (Pillow, police DejaVu). |
-| `142/planche.png`, `142/planche.json` | La planche publiée sur le blog (composée pour la série, **pas une figure du livre**) et la position de ses panneaux. |
-| `142/relire.py` | Relit la planche aux pixels seuls : reconstitue les morceaux de chaque panneau, vérifie qu’ils redonnent le calcul et que les sept sont distincts. Témoin : une coupe effacée doit faire refuser le panneau. |
-
-```sh
-cd 142
-python3 decoupages.py
-python3 planche.py planche.png        # redonne la planche au pixel près
-python3 relire.py planche.png planche.json
-```
 
 ## 252 · A PUZZLE FOR MOTORISTS : 157 tronçons au lieu de 159
 
@@ -98,6 +117,27 @@ cd 275
 python3 denombre.py
 python3 relire_figures.py
 ```
+
+## 343 · EXERCISE FOR PRISONERS : 42 coups au lieu de 66
+
+Un taquin de quinze prisonniers à ranger en parcours de cavalier, coin inférieur droit vide, avec le plus d'hommes possible au repos et le moins de coups possible. Les comptes de Dudeney sont exacts (80 arrangements, 40 atteignables, 2 hommes au repos au plus), mais sa liste de paires contient une coquille (5-13 au lieu de 5-15), il ne trouve que 4 des **9** cibles, et ses **66** coups sont battus : **42** suffisent, et 42 est optimal.
+
+| Fichier | Rôle |
+|---|---|
+| `343/prisonniers.py` | Parcours de cavalier, parité, hommes au repos ; écrit les 9 cibles dans `cibles.txt`. |
+| `343/taquin.c` | Solveur optimal du taquin 4 × 4 (IDA*, distance de Manhattan et conflits linéaires) ; donne 48, 50, 50, 42, 50, 50, 54, 52, 54 coups pour les 9 cibles. |
+| `343/controle_taquin.py` | Contrôle de l'optimalité : une recherche en largeur sans heuristique donne la distance exacte de 920 893 positions ; sur 500 tirées au hasard, `taquin.c` doit trouver exactement cette distance. |
+| `343/rejeu.py` | Rejoue coup par coup les 66 coups de Dudeney et les 42 du solveur. |
+
+```sh
+cd 343
+gcc -O2 -o taquin taquin.c
+python3 prisonniers.py && ./taquin < cibles.txt     # environ 12 s
+python3 controle_taquin.py
+python3 rejeu.py
+```
+
+Correction du 18/10/2026 : la première version de `taquin.c` comptait 2 coups de plus par paire de tuiles inversées dans une ligne, ce qui surestime quand trois tuiles sont inversées. `controle_taquin.py` l'a pris en défaut (3 positions sur 300 résolues en 18 coups au lieu de 16). Le calcul corrigé redonne les mêmes nombres pour les 9 cibles, dont 42.
 
 ## Licence
 
