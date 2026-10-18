@@ -54,7 +54,7 @@ Que ce soit le maximum tient en une phrase : la n-ième coupe croise au plus les
 
 ## 210 · THE TEN COINS : le Compas sur 13 × 13, pas 17 × 12
 
-Dix pièces en cinq lignes droites de quatre. Une telle figure est un arrangement de cinq droites : on énumère les droites du damier, pas les quadruplets de points. Dudeney classe six figures fondamentales et donne, d'après son carnet, le plus petit damier qui porte chacune ; pour le Compas, 17 × 12, en ajoutant « on peut les battre, mais je ne le crois pas ». Le balayage des damiers jusqu'à 13 × 13 trouve bien six types, et **le Compas tient sur 13 × 13** (169 cases contre 204). Le damier 8 × 8 porte trois types, quand il n'en nomme qu'un.
+Dix pièces en cinq lignes droites de quatre. Une telle figure est un arrangement de cinq droites : on énumère les droites du damier, pas les quadruplets de points. Dudeney classe six figures fondamentales et donne, d'après son carnet, le plus petit damier qui porte chacune ; pour le Compas, 17 × 12, en ajoutant « on peut les battre, mais je ne le crois pas ». Le balayage des damiers jusqu'à 13 × 13 trouve bien six types, et **le Compas tient sur 13 × 13** (169 cases contre 204). L'échiquier ordinaire, 8 × 8, porte trois types et non deux : le troisième, son carnet le place sur une planche plus grande.
 
 | Fichier | Rôle |
 |---|---|
