@@ -310,7 +310,7 @@ La solution a été trouvée par « rencontre au milieu » (recherche en arrièr
 
 ## 238 · ARRANGING THE JAM POTS : dix-sept échanges, n moins le nombre de cycles
 
-Le rangement est lu sur la gravure ; la lecture se contrôle par son texte (seuls 13 et 19 sont à leur place). Le minimum d'échanges vaut n moins le nombre de cycles : 24 − 7 = 17, sa réponse, et ses dix-sept échanges, rejoués un par un, trient bien les pots. Il fait le calcul sans nommer le principe ; la formule est vérifiée par force brute sur toutes les permutations de 2 à 6 éléments (872 cas). Son rangement est plus commode que 96 % des rangements possibles.
+Le rangement est lu sur la gravure ; la lecture se contrôle par son texte (seuls 13 et 19 sont à leur place). Le minimum d'échanges vaut n moins le nombre de cycles : 24 − 7 = 17, sa réponse, et ses dix-sept échanges, rejoués un par un, trient bien les pots. Il fait le calcul sans nommer le principe ; la formule est vérifiée par force brute sur toutes les permutations de 2 à 6 éléments (872 cas). Seuls 4,1 % des rangements possibles sont aussi faciles ou plus faciles que le sien.
 
 | Fichier | Rôle |
 |---|---|
