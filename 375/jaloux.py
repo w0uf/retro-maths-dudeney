@@ -68,7 +68,7 @@ print("la jalousie coûte donc exactement deux traversées de plus.")
 # (une première lecture de la table, sur trois points, suggérait « au plus
 # 2p - 1 couples pour un canot de p places » ; c'est faux dès p = 4.)
 import sys
-LOIN = "--loin" in sys.argv            # jusqu'à 14 couples (plusieurs minutes)
+LOIN = "--loin" in sys.argv            # jusqu'à 14 couples (environ 19 min)
 nmax = 14 if LOIN else 10
 print()
 print("canot de 2 et de 3 places : à partir de combien de couples est-ce impossible ?")

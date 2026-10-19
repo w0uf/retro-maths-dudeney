@@ -525,7 +525,7 @@ Cinq couples, un canot de trois places, aucune femme avec un autre homme sans so
 
 | Fichier | Rôle |
 |---|---|
-| `375/jaloux.py` | Parcours en largeur des états (qui est sur quelle rive, où est le canot), table des minimums de 2 à 7 couples et de 2 à 5 places, le seuil. Témoins : une femme seule avec l'autre homme doit être refusée, des femmes seules entre elles acceptées. Environ 15 s ; `--loin` pousse les canots de 4 et 5 places jusqu'à 14 couples (plusieurs minutes). |
+| `375/jaloux.py` | Parcours en largeur des états (qui est sur quelle rive, où est le canot), table des minimums de 2 à 7 couples et de 2 à 5 places, le seuil. Témoins : une femme seule avec l'autre homme doit être refusée, des femmes seules entre elles acceptées. Environ 15 s ; `--loin` pousse les canots de 4 et 5 places jusqu'à 14 couples (environ 19 min) : 14 couples passent en 25 traversées avec 4 places, en 21 avec 5. |
 
 ## 377 · STEALING THE CASTLE TREASURE : onze coups, et tout tient à une incise
 
