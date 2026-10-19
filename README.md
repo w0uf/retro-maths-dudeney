@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 227, 238, 244, 247, 250, 252, 263, 266, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 377.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 227, 238, 244, 247, 250, 252, 263, 266, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 390, 396, 401, 415.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -519,6 +519,14 @@ Deux récipients de dix pintes pleins, une mesure de 5 et une de 4 : mettre 3 pi
 |---|---|
 | `371/lingots.py` | Remplissages vérifiés case par case sur une grille au demi-pouce, côtés possibles, preuves d'impossibilité, caisses rivales. Témoins : un lingot retiré, puis un lingot décalé, doivent faire échouer le remplissage. Instantané. |
 
+## 375 · FIVE JEALOUS HUSBANDS : onze traversées, et un seuil à quatre places
+
+Cinq couples, un canot de trois places, aucune femme avec un autre homme sans son mari, ni sur les rives ni dans le canot : 11 traversées au minimum, comme Dudeney ; sans jalousie, 9 suffiraient. Pour la suite, ce n'est pas une loi mais un seuil : un canot de 2 places porte au plus 3 couples, un canot de 3 places au plus 5 (cinq couples sont donc pile au plafond), et à partir de 4 places il n'y a plus de limite.
+
+| Fichier | Rôle |
+|---|---|
+| `375/jaloux.py` | Parcours en largeur des états (qui est sur quelle rive, où est le canot), table des minimums de 2 à 7 couples et de 2 à 5 places, le seuil. Témoins : une femme seule avec l'autre homme doit être refusée, des femmes seules entre elles acceptées. Environ 15 s ; `--loin` pousse les canots de 4 et 5 places jusqu'à 14 couples (plusieurs minutes). |
+
 ## 377 · STEALING THE CASTLE TREASURE : onze coups, et tout tient à une incise
 
 Une poulie, deux paniers, l'homme (195 lb), le jeune homme (105), le garçon (90) et le coffre (75), écart maximal 15 lb pour un humain qui descend. Onze manipulations est bien le minimum, et il y a 8 suites optimales. Si la limite valait aussi pour le coffre descendant seul, ce serait impossible : tout tient à l'incise « quoiqu'elle n'abîmât pas le bien volé ». La règle de chargement, elle, ne change rien.
@@ -526,6 +534,38 @@ Une poulie, deux paniers, l'homme (195 lb), le jeune homme (105), le garçon (90
 | Fichier | Rôle |
 |---|---|
 | `377/panier.py` | Parcours en largeur sous trois lectures de la règle, sa suite vérifiée coup par coup, comptage des suites optimales, variante sans règle de chargement. Témoin : l'homme qui descend seul doit être refusé. Instantané. |
+
+## 390 · THE HORSE-RACE PUZZLE : 12, 15, 20, et un bookmaker imaginaire
+
+Cotes de 4, 3 et 2 contre 1 : miser 12, 15 et 20 livres rapporte 13 livres quel que soit le vainqueur, comme il le dit. Le pari sûr n'existe que parce que les probabilités implicites (1/5, 1/4, 1/3) totalisent 47/60, moins que 1 ; avec un livre juste, le gain garanti est nul, et avec une marge, il n'y en a aucun.
+
+| Fichier | Rôle |
+|---|---|
+| `390/course.py` | Son exemple à 5 livres, la résolution exacte, trois livres de cotes comparés. Témoin : 12 / 15 / 21 doit donner des gains inégaux. Instantané. |
+
+## 396 · A MATCH MYSTERY : ses treize répartitions, et l'exception qu'il omet
+
+Trente allumettes en trois tas, qui prend la dernière perd (Nim « misère ») : le calcul direct du jeu, sans théorie, retrouve exactement ses treize répartitions gagnantes. Sa règle des puissances de deux (le ou exclusif de Bouton, 1901) est exacte, sauf dans les positions où chaque tas ne contient qu'une allumette ; il signale « 1 et 1 » dans son dialogue, mais pas dans l'énoncé de la règle, et le dernier coup de sa propre partie d'exemple (1, 1, 1) est justement celui que sa règle déconseille. Le mot « inégaux » de l'énoncé est superflu.
+
+| Fichier | Rôle |
+|---|---|
+| `396/allumettes.py` | Le jeu calculé par récursion, la règle confrontée au calcul, le nombre de répartitions selon le total (1, 4, 13, 40 pour 6, 14, 30, 62), sa partie d'exemple. Témoins : (16, 13, 1) doit être perdante pour qui la laisse, et (1, 1) gagnante pour qui joue. Instantané. |
+
+## 401 · EIGHT JOLLY GAOL BIRDS : ses deux suites sont les seules
+
+Taquin 3 × 3 à former en carré magique : 8 carrés possibles, 4 atteignables (parité du taquin), minimum 19 coups, deux carrés atteints en 19 ; les deux autres coûtent 23 et 25. Chacun des deux carrés à 19 coups n'a qu'une seule suite optimale, et ce sont exactement les deux qu'il imprime ; dans l'une, le prisonnier n° 3 ne bouge pas.
+
+| Fichier | Rôle |
+|---|---|
+| `401/prisonniers9.py` | Les carrés magiques, parcours en largeur des 181 440 positions, toutes les suites optimales, ses deux suites rejouées. Témoins : sa suite sans le dernier coup, ou avec deux coups intervertis, doit être refusée. Environ 1 s. |
+
+## 415 · A WONDERFUL VILLAGE : vrai partout ? non, pas au Japon en hiver
+
+Le soleil est plus proche à midi qu'à son lever de R cos z, où z est sa distance zénithale à midi. Avec R = 3 959 milles, l'écart ne dépasse 3 000 milles que si z < 40,7°. La réponse de Dudeney suppose le soleil au zénith : au Japon, elle est fausse une partie de l'année (Tokyo : 157 jours sur 365 ; Sapporo : 194), et elle n'est vraie toute l'année qu'en dessous d'environ 17° de latitude.
+
+| Fichier | Rôle |
+|---|---|
+| `415/village.py` | Le seuil, l'écart selon la date, le nombre de jours par latitude (déclinaison approchée par une sinusoïde). Témoins : à l'équateur, vraie 365 jours, au pôle, aucun. Instantané. |
 
 ## Licence
 
