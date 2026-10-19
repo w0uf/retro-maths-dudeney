@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 142, 157, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -184,6 +184,14 @@ Ses six nombres sont exactement les six premiers nombres à la fois carrés et t
 |---|---|
 | `137/epargne.py` | Son tableau ligne par ligne, la suite des carrés triangulaires, la récurrence, le théorème d'Eureka jusqu'à 200 000. Témoin : le contrôle doit refuser la ligne de 1225, et elle seule. Environ 5 s. |
 
+## 140 · FIND ADA'S SURNAME : solution unique, et la clause « environ le quart » est inutile
+
+Chaque dépense est le carré du métrage, et chaque mère dépense 405 farthings de plus que sa fille. 405 = 3⁴ × 5 ne se factorise en m² − d² que de **cinq** façons, une par mère. La solution est unique et c'est la sienne (Ada Smith, Annie Brown, Emily Jones, Mary Robinson, Bessie Evans) ; elle le reste quand on retire la clause « environ le quart » (rapport réel 0,2385).
+
+| Fichier | Rôle |
+|---|---|
+| `140/ada.py` | Les cinq couples, la recherche avec et sans la clause. Témoins : Ada et Emily échangées doivent être refusées ; un écart mal converti (404 farthings) ne doit plus donner cinq couples. Instantané. |
+
 ## 142 · THE SILK PATCHWORK : les sept découpages
 
 Un patchwork en croix de 21 carrés. Il faut garder un carré entier et découper le reste en quatre morceaux identiques, en suivant les coutures, qui forment une croix grecque. Dudeney donne un découpage ; il y en a **sept** (aux symétries du patchwork près) : trois avec le carré gardé au centre, quatre avec le carré gardé au bord.
@@ -202,6 +210,14 @@ python3 planche.py planche.png        # redonne la planche au pixel près
 python3 relire.py planche.png planche.json
 ```
 
+## 150 · DISSECTING A MITRE : aucun escalier ne carre la mitre
+
+La découpe américaine en quatre morceaux, fondée sur l'escalier, donne 72 × 73½ et non un carré : Dudeney a raison, et sa réparation (petit côté 61 + 5/7) est exacte. Plus fort : un rectangle de grand côté 84 glissé d'un cran sur n marches ne devient carré que si le petit côté vaut 84 (n − 1)²/n² ; la mitre impose 63, strictement entre n = 7 et n = 8, donc **aucun** nombre de marches ne convient. Le côté du carré, 42√3, est incommensurable avec celui de la mitre.
+
+| Fichier | Rôle |
+|---|---|
+| `150/mitre.py` | Sa réfutation et sa réparation en fractions exactes, la formule générale de l'escalier. Témoin : 84 × 432/7 sur 7 marches doit donner un carré ; la mitre n'en donne aucun de 2 à 2 000 marches. Instantané. |
+
 ## 157 · THE TABLE-TOP AND STOOLS : la découpe est exacte, et le maître pouvait gagner
 
 Un plateau rond découpé en huit pièces pour faire deux tabourets percés d'un trou. La découpe de Dudeney tient à un seul nombre : des cordes à R·sin(π/8). Le bois est conservé au dernier chiffre (le trou vaut (π − 2√2)R²/4), ses trois affirmations comparatives sont vraies, et la gravure montre que le maître d'école a pris un cercle intérieur de rayon R/2. Mais avec un cercle de rayon inférieur à 0,370 R, le maître aurait fait un trou plus petit que l'élève, sans changer sa méthode.
@@ -210,6 +226,14 @@ Un plateau rond découpé en huit pièces pour faire deux tabourets percés d'un
 |---|---|
 | `157/tabouret.py` | Reconstruction des deux découpes, conservation du bois, intégration numérique du trou, mesure des gravures, comparaison des trous. Témoin : avec des cordes mal placées, les pièces ne se raccordent pas. Pillow et NumPy. |
 | `157/q157.png`, `157/a157b.png` | Les gravures de l'énoncé et de la solution (transcription Gutenberg, domaine public). |
+
+## 161 · THE BETSY ROSS PUZZLE : le nombre d'or sort du pliage
+
+Le pli impose dix sommets espacés de 36°, alternativement pointes et creux ; le coup de ciseaux ne règle que la profondeur des creux. L'étoile régulière exige un rapport creux/pointe de cos 72°/cos 36° = 1/φ² = 0,381966… : c'est le seul qui aligne les côtés des branches, et l'angle au sommet vaut alors 36°.
+
+| Fichier | Rôle |
+|---|---|
+| `161/etoile.py` | Les dix sommets, le rapport, l'alignement des côtés, l'angle de la pointe. Témoins : des creux à 0,30, 0,38, 0,385 et 0,50 doivent désaligner les branches. Instantané. |
 
 ## 164 · THE POTATO PUZZLE : la réponse est juste, la formule imprimée ne l'est pas
 
@@ -220,6 +244,14 @@ Combien de morceaux, au plus, avec six coups droits dans une tranche de pomme de
 | `164/patate.py` | Trace n coupes qui se croisent deux à deux dans le disque et compte les morceaux sur un maillage fin, sans formule : 1, 2, 4, 7, 11, 16, 22, 29 pour 0 à 7 coups. Compte aussi la gravure (16). Témoin : trois coupes par un même point doivent perdre un morceau. |
 
 Que ce soit le maximum tient en une phrase : la n-ième coupe croise au plus les n − 1 précédentes, donc traverse au plus n morceaux et en ajoute au plus n.
+
+## 188 · THE BALL PROBLEM : le cube donne le même nombre que la sphère, et ce n'est pas un hasard
+
+Six boules autour d'une boule au sol, et une sphère de diamètre 6 a une aire égale à son volume (π disparaît). Le cube de côté 6 aussi : pour tout solide circonscrit à une sphère, V = S·r/3, donc aire = volume revient à un rayon inscrit de 3, quelle que soit la forme. Vérifié sur la sphère, le cube, le tétraèdre et l'octaèdre réguliers, le cylindre.
+
+| Fichier | Rôle |
+|---|---|
+| `188/boule.py` | Les deux réponses, le tableau des cinq solides. Témoin : le pavé 4 × 6 × 12 a lui aussi aire = volume (288), mais sans sphère inscrite ; la loi ne s'y applique pas. Instantané. |
 
 ## 194 · THE GARDEN WALLS : chacun a autant de mur que le champ entier
 
@@ -248,6 +280,22 @@ Dix pièces en cinq lignes droites de quatre. Une telle figure est un arrangemen
 | `210/verifie.py` | Contrôle indépendant des 14 307 figures du damier 13 × 13 : dix cases distinctes, cinq alignements de quatre et pas d'autre. Témoin : une pièce déplacée d'une case doit être refusée. |
 
 Réserve : le balayage s'arrête aux damiers de côtés 13 au plus.
+
+## 218 · THE VICTORIA CROSS PUZZLE : six solutions en 18 coups, et sa curiosité des 28 coups ne coûte rien
+
+Huit lettres de VICTORIA sur une croix de neuf cases, à faire tourner pour amener le V sur un bras noir. Sa remarque de parité est exacte, le minimum est 18 coups, il y a exactement six solutions optimales, sa séquence imprimée en est une, et ses trois traits communs se vérifient sur les six. Sa phrase « A VICTOR! A VICTOR! A VICTOR I! » (22 coups) arrive à bon port. Mais il présente comme coûteuse (28 coups) une solution où seuls les I passent par le centre : deux des six solutions optimales le font déjà, dont la sienne.
+
+| Fichier | Rôle |
+|---|---|
+| `218/victoria.py` | Parcours en largeur des 181 440 positions, parité, solutions optimales, sa phrase mnémotechnique, la contrainte du centre. Témoins : sa séquence avec deux coups intervertis, ou sans le dernier coup, doit être refusée. Environ 1 s. |
+
+## 219 · THE LETTER BLOCK PUZZLE : 23 coups, et un seul chemin optimal
+
+Le taquin 3 × 3 à huit lettres. Ses 23 coups sont légaux et aboutissent ; 23 est le minimum, et il n'existe qu'**un** chemin optimal, le sien. Le petit taquin a 181 440 positions accessibles (la moitié de 9!) et un diamètre de 31 coups, atteint par deux positions.
+
+| Fichier | Rôle |
+|---|---|
+| `219/taquin.py` | Rejeu de sa suite, parcours en largeur, comptage des chemins optimaux, diamètre. Témoins : sa suite avec deux coups intervertis, ou sans le dernier, doit être refusée. Instantané. |
 
 ## 227 · CENTRAL SOLITAIRE : 18 coups au lieu de 19
 
