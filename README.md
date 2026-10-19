@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 390, 396, 401, 415.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 415.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 224, le 244 et le 343.
 
@@ -55,6 +55,14 @@ Les aiguilles sont opposées et parallèles à une diagonale d'un mur de 71 pi 9
 |---|---|
 | `065/horloge.py` | Les onze instants en fractions exactes, l'écart à la diagonale, la hauteur exacte qu'il faudrait, la marge de tolérance. Témoin : un mur carré ne doit désigner aucun instant. Instantané. |
 
+## 078 · ODD AND EVEN DIGITS : sa somme est la seule
+
+Écrire avec les impairs, puis avec les pairs, deux sommes égales (entiers et fractions propres, chaque chiffre une fois). Sur toutes les écritures possibles des deux groupes, une seule valeur est commune : la sienne, 84 1/3. Côté impairs elle s'écrit de deux façons (79 + 5 + 1/3 et 75 + 9 + 1/3), côté pairs d'une seule (84 + 2/6). Sans fraction, c'est impossible (preuve par neuf : 25 et 20 n'ont pas le même reste). Hors de l'article : les décimaux finis, que l'énoncé n'exclut pas, ne donnent aucune solution non plus.
+
+| Fichier | Rôle |
+|---|---|
+| `078/chiffres.py` | Toutes les écritures des deux groupes, valeurs communes, cas sans fraction et variante décimale. Témoin : deux groupes de même reste modulo 9 ({1, 8} et {2, 7}) doivent, eux, se rencontrer sans fraction. Instantané. |
+
 ## 079 · THE LOCKERS PUZZLE : son compte et sa table sont exacts, et la table dit plus qu'il ne voit
 
 Trois additions abc + def = ghi à neuf chiffres distincts. Il y a 544 additions (à l'ordre des termes près) et 115 totaux, de 356 à 981 ; le casier du milieu n'a que trois totaux possibles, les siens, et son compte de 3 072 dispositions est exact (1 × 3 × 2 classes, × 8³ échanges de colonnes). Sa table « chiffre omis → somme des chiffres du total » est exacte sur les 544 additions ; elle entraîne une loi qu'il n'énonce pas : 2·S(total) = 45 − d − 9c, donc **une retenue exactement si le chiffre omis est pair, deux s'il est impair**.
@@ -86,6 +94,14 @@ Les chiffres 1 à 9, chacun une fois, en deux multiplications de même produit ;
 | Fichier | Rôle |
 |---|---|
 | `083/multiplication.py` | Toutes les permutations des neuf chiffres, coupées en quatre nombres de toutes les façons ; répartition des sommes ; ses deux réponses. Témoins : une égalité qui n'emploie pas les neuf chiffres doit être refusée. Environ 6 s. |
+
+## 086 · QUEER MULTIPLICATION : 87 solutions avec 6, et seuls 3, 6 et 9 marchent
+
+Un multiplicande de huit chiffres et un multiplicateur d'un chiffre prennent les neuf chiffres une fois, et le produit aussi. Dudeney donne une solution pour 6 ; il y en a 87. Avec 3 il y en a 336, avec 9, 144, et avec 2, 4, 5, 7, 8 aucune : la preuve par neuf impose que le carré du multiplicateur soit multiple de 9. Les trois multiplicateurs de son énoncé sont donc les trois seuls possibles.
+
+| Fichier | Rôle |
+|---|---|
+| `086/multiplication.py` | Les 40 320 arrangements pour chaque multiplicateur de 2 à 9 ; contrôle de ses trois exemples. Témoins : sa réponse avec deux chiffres permutés doit être refusée. Instantané. |
 
 ## 088 · DIGITAL DIVISION : sa règle « de même le 1 » est fausse
 
@@ -557,6 +573,25 @@ Une poulie, deux paniers, l'homme (195 lb), le jeune homme (105), le garçon (90
 |---|---|
 | `377/panier.py` | Parcours en largeur sous trois lectures de la règle, sa suite vérifiée coup par coup, comptage des suites optimales, variante sans règle de chargement. Témoin : l'homme qui descend seul doit être refusé. Instantané. |
 
+## 385 · "STRAND" PATIENCE : 56 coups, son record de 62 est battu
+
+Deux piles de neuf cartes, quatre places vides ; une carte se pose sur une place vide ou sur la valeur immédiatement supérieure, et il faut échanger piques et trèfles. Dudeney : « 62 moves… This is my record; perhaps the reader can beat it. » Le plus court chemin parmi les 308 196 positions atteintes fait 56 coups, et aucun n'est plus court. Le modèle est validé de deux façons : ses remarques de l'énoncé (quatre cartes en 7 coups avec quatre places, en 9 avec trois, deux cartes au plus avec deux) sont retrouvées, et sa partie de 62 coups, écrite en blocs (« 4 C up on 5 D (9) »), se rejoue bloc par bloc avec exactement ses décomptes.
+
+| Fichier | Rôle |
+|---|---|
+| `385/patience.py` | Parcours en largeur jusqu'à l'échange, et ses remarques sur les piles ; écrit `partie_56.txt`. Environ 3 s. |
+| `385/partie_56.txt` | La partie de 56 coups. |
+| `385/rejoue.py` | Rejeu indépendant, coup par coup. Témoins : sans le dernier coup, deux coups intervertis qui dépendent l'un de l'autre, une carte posée sur une valeur non voisine, un coup de trop doivent être refusés ; deux coups indépendants intervertis doivent passer. |
+| `385/dudeney62.py` | Rejeu de sa partie de 62 coups, chaque bloc compté par le plus court chemin et comparé au sien. Témoin : un bloc compté 8 au lieu de 9 doit faire échouer le rejeu. |
+
+## 387 · THE VILLAGE CRICKET MATCH : sa réponse tient à une hypothèse muette
+
+Quatre courses apparemment complètes, « trois courtes » à chaque bout : Dumkins ne marque rien ; trois courses, « deux courtes » à chaque bout : Struggles marque un point. En essayant toutes les répartitions des arrivées bonnes et courtes, ses deux réponses sont les seules **si chaque batteur finit sa dernière course dans un pli**, ce que Dudeney suppose sans l'écrire. Sans cette condition, les annonces des arbitres laissent 16 façons de courir dans le premier cas, 9 dans le second, avec des issues différentes.
+
+| Fichier | Rôle |
+|---|---|
+| `387/cricket.py` | Toutes les répartitions, avec et sans l'hypothèse. Témoins : sans aucune course courte, quatre allers simples ramènent chacun chez soi et trois les font changer de bout. Instantané. |
+
 ## 390 · THE HORSE-RACE PUZZLE : 12, 15, 20, et un bookmaker imaginaire
 
 Cotes de 4, 3 et 2 contre 1 : miser 12, 15 et 20 livres rapporte 13 livres quel que soit le vainqueur, comme il le dit. Le pari sûr n'existe que parce que les probabilités implicites (1/5, 1/4, 1/3) totalisent 47/60, moins que 1 ; avec un livre juste, le gain garanti est nul, et avec une marge, il n'y en a aucun.
@@ -580,6 +615,14 @@ Taquin 3 × 3 à former en carré magique : 8 carrés possibles, 4 atteignables 
 | Fichier | Rôle |
 |---|---|
 | `401/prisonniers9.py` | Les carrés magiques, parcours en largeur des 181 440 positions, toutes les suites optimales, ses deux suites rejouées. Témoins : sa suite sans le dernier coup, ou avec deux coups intervertis, doit être refusée. Environ 1 s. |
+
+## 404 · THE SIBERIAN DUNGEONS : les 14 déplacements de Mr. Wotherspoon sont un minimum
+
+Seize prisonniers doivent former un carré magique dans un carré de cellules, chacun ne bougeant que par des cellules vides. Dudeney donne la solution en 14 déplacements d'un lecteur et se dit « confident that it cannot be improved upon », sans le démontrer. Sur les 7 040 carrés magiques d'ordre 4, un prisonnier mal placé bouge au moins une fois : un carré qui en laisse k en place demande au moins 16 − k déplacements. Les 13 carrés qui en laissent trois ou quatre ne se forment ni en 13 ni en 14 ; parmi ceux qui en laissent deux, un seul se forme en 14, celui du corrigé. 14 est donc le minimum, et il n'y a qu'un carré pour l'atteindre.
+
+| Fichier | Rôle |
+|---|---|
+| `404/cachots.py` | Rejeu des 14 déplacements, recensement des carrés magiques, preuve du minimum. Témoins : au départ, le prisonnier 16, muré par 8 et 15, ne doit pas pouvoir sortir ; le carré du corrigé doit se former en 14 et pas en 13. Une dizaine de secondes. |
 
 ## 415 · A WONDERFUL VILLAGE : vrai partout ? non, pas au Japon en hiver
 
