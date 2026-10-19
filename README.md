@@ -2,9 +2,9 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 415.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 032, 046, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 414, 415, 419.
 
-Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 224, le 244 et le 343.
+Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 224, le 244 et le 343.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
 
@@ -16,6 +16,14 @@ Une couronne de timbres : des timbres à 2 d, six fois plus à 1 d, le reste à 
 |---|---|
 | `001/timbres.py` | Balayage complet. Témoins : trois commandes fausses, dont (5, 30, 9), doivent être refusées. Le script de l'atelier ayant été perdu, celui-ci le refait. Instantané. |
 
+## 018 · THE MARKET WOMEN : la coquille est dans la transcription, pas chez Dudeney
+
+Le nombre de marchandes est le nombre de diviseurs de la recette en farthings. Avec 2 s. 2 1/4 d. (édition de 1917) : 105 farthings, 8 diviseurs, 8 marchandes, comme au corrigé. Avec 2 s. 2 1/2 d. (transcription de Project Gutenberg) : 106 farthings, 4 marchandes seulement, et le corrigé ne tient plus. Si l'on admet les demi-livres, le nombre double (16) ; les quarts de livre, il triple (24). Entre 2 s. et 2 s. 6 d., les recettes donnent de 2 à 16 marchandes.
+
+| Fichier | Rôle |
+|---|---|
+| `018/marchandes.py` | Diviseurs des deux recettes, variantes en demi-livres et quarts, balayage de la tranche. Témoins : 12 doit avoir six diviseurs, 13 deux. Instantané. |
+
 ## 032 · THE EXCURSION TICKET PUZZLE : son nombre exige le double florin
 
 Payer 19 s 9 d (948 farthings) avec la monnaie courante du royaume : Dudeney annonce 458 908 622 façons sans donner sa méthode. On ne retrouve son nombre qu'en comptant le **double florin** (4 s, frappé de 1887 à 1890, jamais démonétisé) ; sans lui, on obtient 357 549 696. Son tableau de la monnaie rendue (douze pièces, du farthing au souverain) est exact aux douze lignes, et sa formule (n + 1)² pour le bronze aussi.
@@ -23,6 +31,14 @@ Payer 19 s 9 d (948 farthings) avec la monnaie courante du royaume : Dudeney ann
 | Fichier | Rôle |
 |---|---|
 | `032/billets.py` | Programmation dynamique sur les farthings, pour plusieurs jeux de pièces ; sa formule du bronze ; son tableau. Témoins : le calcul est recoupé par une énumération directe sur de petites sommes, et une version fautive (qui compte les ordres de paiement) doit être refusée. Environ 1 s. |
+
+## 046 · MARY AND MARMADUKE : aucune solution en mois entiers
+
+Ses âges, 29 ans 2/5 et 19 ans 3/5, sont la seule solution ; en comptant par années ou par mois entiers, il n'y en a aucune, en cinquièmes ou en soixantièmes d'année, la sienne seulement. Entre 55 et 75 ans pour la somme annoncée, quatre valeurs seulement (59, 64, 69, 74) donnent des âges entiers : son 63 n'en est pas.
+
+| Fichier | Rôle |
+|---|---|
+| `046/ages.py` | Recherche des âges à différents pas de temps, balayage des sommes. Témoin positif : la somme 64 doit donner des âges entiers. Instantané. |
 
 ## 056 · WILSON'S POSER : huit personnes, et exactement trois façons
 
@@ -143,6 +159,14 @@ Cinq bottes pesées deux à deux de toutes les façons : dix nombres, sans savoi
 |---|---|
 | `101/bottes.py` | Reconstruction exhaustive puis en fractions exactes ; balayage de 2 à 8 bottes, éprouvé d'abord sur le témoin {1, 4, 6, 7} / {2, 3, 5, 8} ; les 252 choix de cinq pesées, deux critères comparés ; les 80 erreurs simulées. Instantané. |
 
+## 111 · REAPING THE CORN : deux aires trop faibles d'un millième, et d'où elles viennent
+
+La valeur exacte est 24 + 16√2 perches carrées. Son côté intérieur (4.8284) et son aire en acres (.2914) sont justes ; ses deux aires sont trop faibles d'un millième (46.626 pour 46.627, 23.313 pour 23.314). Elles s'expliquent : 4.8284 au carré donne 23.3134, d'où 23.313, et le double de 23.313 fait exactement 46.626.
+
+| Fichier | Rôle |
+|---|---|
+| `111/moisson.py` | Calcul à trente chiffres, arrondis comparés aux siens, origine des deux aires. Témoin : le grand côté arrondi (6.8284) au carré ne redonne pas son nombre. Instantané. |
+
 ## 118 · CIRCLING THE SQUARES : six dispositions, et la règle 4n + 6 est un théorème
 
 Dix cases en cercle, quatre nombres donnés ; pour deux voisines, la somme des carrés égale celle des deux opposées. L'écart des carrés de deux cases opposées est donc constant (192), au signe près ; ses cinq paires sortent des factorisations de 192, et il y a exactement **six** façons de compléter le cercle, comme il le dit. Sa remarque finale, « le nombre de cases doit être de la forme 4n + 6 », est exacte : le signe de l'écart alterne, donc la moitié du nombre de cases doit être impaire.
@@ -150,6 +174,14 @@ Dix cases en cercle, quatre nombres donnés ; pour deux voisines, la somme des c
 | Fichier | Rôle |
 |---|---|
 | `118/cercle.py` | Les paires, le balayage complet des dispositions, 260 = 16² + 2² = 14² + 8². Une recherche directe, qui n'emploie que la condition, trouve des cercles de 6 et 10 cases et aucun de 4, 8 ou 12 (nombres distincts jusqu'à 60). Témoin : deux cases voisines échangées doivent être refusées. Instantané. |
+
+## 127 · SIMPLE DIVISION : le plus grand diviseur est aussi le seul
+
+179, reste 164, comme au corrigé. En essayant tous les diviseurs de 2 à 2 312, aucun autre ne laisse quatre restes égaux. Les trois différences entre voisins suffisent (elles donnent le même pgcd que ses six), et les quatre nombres sont des multiples de 179 diminués de 15. En descendant depuis 700, il faut 522 essais pour tomber sur 179.
+
+| Fichier | Rôle |
+|---|---|
+| `127/division.py` | Pgcd des différences, essai direct de tous les diviseurs. Témoins : {7, 12, 17} doit donner 5, {7, 12, 18} rien. Instantané. |
 
 ## 128 · A PROBLEM IN SQUARES : le défi de la raison 23 relevé
 
@@ -233,6 +265,14 @@ La découpe américaine en quatre morceaux, fondée sur l'escalier, donne 72 × 
 | Fichier | Rôle |
 |---|---|
 | `150/mitre.py` | Sa réfutation et sa réparation en fractions exactes, la formule générale de l'escalier. Témoin : 84 × 432/7 sur 7 marches doit donner un carré ; la mitre n'en donne aucun de 2 à 2 000 marches. Instantané. |
+
+## 152 · ANOTHER JOINER'S PROBLEM : sa règle vaut pour toutes les tailles
+
+Sa construction (reporter la moitié du grand côté du triangle, scier B F et B E) refaite en coordonnées sur huit triangles de taille croissante, jusqu'à près de deux fois le côté du carré : les deux traits sont toujours égaux et perpendiculaires, la découpe donne toujours cinq morceaux, deux restent en place, et un programme range les trois autres dans le carré final sans en retourner aucun. Quand le triangle a l'aire du carré, elle dégénère en trois morceaux.
+
+| Fichier | Rôle |
+|---|---|
+| `152/menuisier.py` | Découpe et assemblage pour chaque taille (shapely). Témoin : l'assembleur doit ranger deux demi-carrés dans le carré, et refuser un 0,6 et un 0,5. Environ une seconde. |
 
 ## 157 · THE TABLE-TOP AND STOOLS : la découpe est exacte, et le maître pouvait gagner
 
@@ -624,6 +664,14 @@ Seize prisonniers doivent former un carré magique dans un carré de cellules, c
 |---|---|
 | `404/cachots.py` | Rejeu des 14 déplacements, recensement des carrés magiques, preuve du minimum. Témoins : au départ, le prisonnier 16, muré par 8 et 15, ne doit pas pouvoir sortir ; le carré du corrigé doit se former en 14 et pas en 13. Une dizaine de secondes. |
 
+## 414 · WHO WAS FIRST? : la balle doit battre le son
+
+À un mille, la lumière met 5,4 millionièmes de seconde, le son de 4,9 s (0 °C) à 4,7 s (20 °C). L'ordre du corrigé suppose que la balle tienne en moyenne plus de 340 m/s sur tout le mille (15 °C), ce que Dudeney ne dit pas.
+
+| Fichier | Rôle |
+|---|---|
+| `414/balle.py` | Temps de la lumière et du son selon la température (formule usuelle de la vitesse du son dans l'air sec). Témoins : 331,3 m/s à 0 °C et 343 m/s à 20 °C. Instantané. |
+
 ## 415 · A WONDERFUL VILLAGE : vrai partout ? non, pas au Japon en hiver
 
 Le soleil est plus proche à midi qu'à son lever de R cos z, où z est sa distance zénithale à midi. Avec R = 3 959 milles, l'écart ne dépasse 3 000 milles que si z < 40,7°. La réponse de Dudeney suppose le soleil au zénith : au Japon, elle est fausse une partie de l'année (Tokyo : 157 jours sur 365 ; Sapporo : 194), et elle n'est vraie toute l'année qu'en dessous d'environ 17° de latitude.
@@ -631,6 +679,14 @@ Le soleil est plus proche à midi qu'à son lever de R cos z, où z est sa dista
 | Fichier | Rôle |
 |---|---|
 | `415/village.py` | Le seuil, l'écart selon la date, le nombre de jours par latitude (déclinaison approchée par une sinusoïde). Témoins : à l'équateur, vraie 365 jours, au pôle, aucun. Instantané. |
+
+## 419 · THE FIVE PENNIES : « à égale distance » est impossible au sens propre
+
+Le déterminant de Cayley-Menger de cinq points deux à deux à la même distance vaut −5 : ils ne tiennent pas dans l'espace. Celui de quatre vaut 4 : ils ne tiennent pas dans un plan. Les pennies ne se touchent tous que grâce à leur forme plate, pas par leurs centres.
+
+| Fichier | Rôle |
+|---|---|
+| `419/pennies.py` | Déterminants exacts (fractions). Témoins : quatre sommets d'un carré et cinq sommets d'un cube doivent donner 0. Instantané. |
 
 ## Licence
 
