@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 227, 238, 244, 247, 250, 252, 263, 266, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 377.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -308,6 +308,14 @@ Le solitaire anglais à 33 trous, trou central vide au départ, une seule bille 
 
 La solution a été trouvée par « rencontre au milieu » (recherche en arrière sur 6 coups depuis la bille finale, en avant sur 12 depuis le départ) ; ce programme de recherche n'a pas été conservé. Ce qui est établi ici, c'est que la suite de 18 coups est valide.
 
+## 238 · ARRANGING THE JAM POTS : dix-sept échanges, n moins le nombre de cycles
+
+Le rangement est lu sur la gravure ; la lecture se contrôle par son texte (seuls 13 et 19 sont à leur place). Le minimum d'échanges vaut n moins le nombre de cycles : 24 − 7 = 17, sa réponse, et ses dix-sept échanges, rejoués un par un, trient bien les pots. Il fait le calcul sans nommer le principe ; la formule est vérifiée par force brute sur toutes les permutations de 2 à 6 éléments (872 cas). Son rangement est plus commode que 96 % des rangements possibles.
+
+| Fichier | Rôle |
+|---|---|
+| `238/pots.py` | Lecture de la gravure, cycles, ses dix-sept échanges, la formule contre la force brute, la loi du nombre de cycles. Témoins : sans son dernier échange, les pots ne sont pas triés ; une gravure mal lue (13 et 14 échangés) contredit son texte ; la force brute refuse la formule naïve « n − points fixes ». Environ 1 s. |
+
 ## 244 · THE FIFTEEN TURNINGS : quand Python bat Dudeney
 
 Soixante-quatre villes en carré, huit par huit, à un mile l’une de l’autre. Le voyageur part de la ville noire (bord gauche, cinquième rangée en partant du haut), fait quinze tournants au plus et ne reprend jamais une route. Jusqu’où peut-il aller ?
@@ -341,6 +349,22 @@ Usage du programme C : `verif_244 <tournants> <seuil> [affichage]` compte les tr
 Maxima obtenus : 5 tournants → 38 (l’exemple de Dudeney en fait 37), 6 → 43, 7 → 48, 8 → 53, 13 → 70, 14 → 73, 15 → 76.
 
 Nous ne savons pas si ce dépassement du livre a déjà été publié ailleurs. Signalez-le-nous si c’est le cas.
+
+## 247 · INSPECTING A MINE : le problème du facteur chinois, 45 ans avant son nom
+
+Vingt puits en quadrillage 5 × 4, trente et une galeries. Sa tournée de 36 stades parcourt les 31 galeries et en refait exactement cinq, celles qu'il nomme. 36 est le minimum (couplage minimal des dix nœuds impairs), et une tournée optimale finit en Q ou en S. Partir d'un nœud impair donnerait 35, comme il le dit. C'est le problème que Guan Meigu posera en 1962.
+
+| Fichier | Rôle |
+|---|---|
+| `247/mine.py` | Le graphe, les nœuds impairs, le couplage minimal pour chaque arrivée, sa tournée rejouée. Témoins : sa tournée privée d'un puits, ou de ses trois derniers stades, doit être refusée. Instantané. |
+
+## 250 · THE GRAND TOUR : la conclusion est juste, l'argument ne la prouve pas
+
+La carte se ramène à une grille 4 × 6, A et Z aux coins opposés, de même couleur : aucun itinéraire ne passe une fois par chaque ville (0, par énumération). Avec sa faille (l'homme peut *entrer* une fois dans A), il y a 43 itinéraires, et tous reviennent en A aussitôt après l'avoir quitté, comme il l'affirme. Mais son coloriage ne l'impose pas : il permettrait des retours après 3 ou 5 villes, et ce n'est que l'énumération qui les exclut.
+
+| Fichier | Rôle |
+|---|---|
+| `250/grand_tour.py` | Coloriage, énumération des itinéraires, les 43 avec la faille, les circuits que le coloriage n'exclut pas. Témoin : vers le coin de l'autre couleur, le même compteur doit trouver des itinéraires (47). Instantané. |
 
 ## 252 · A PUZZLE FOR MOTORISTS : 157 tronçons au lieu de 159
 
@@ -433,6 +457,23 @@ Dix tonneaux numérotés de 1 à 10 en deux rangées de cinq, les numéros crois
 |---|---|
 | `279/balsam.py` | Force brute sur les 10! ordres, formule des équerres jusqu'à 24 tonneaux, bijection avec le dépouillement d'un scrutin, et le cas 3 × 3. |
 
+## 283 · THE FIFTEEN DOMINOES : 126 720, et son nombre à treize chiffres est exact
+
+Les quinze dominos du double-quatre en ligne : 126 720 façons, par énumération directe. Sa décomposition 264 × 2⁵ × 15 se retrouve : 528 circuits eulériens du pentagone depuis un sommet fixe, comptés deux fois parce que chaque circuit repasse deux fois par ce sommet, soit 264. Pour le jeu complet de 28, son 7 959 229 931 520 est exact (programmation dynamique sur les 2²¹ ensembles d'arêtes de K₇) ; mais le facteur des doubles y est 3⁷, et non 2⁷ : le « 2 » est le nombre de passages par chaque sommet. Les jeux au double impair ne s'alignent jamais.
+
+| Fichier | Rôle |
+|---|---|
+| `283/dominos.py` | Énumération directe pour les doubles-deux, -trois et -quatre, les circuits du pentagone. Témoins : le double-deux doit donner 12, le double-trois 0 ; le faux facteur 2⁷ donnerait 465 835 130 880. Environ 3 s. |
+| `283/dominos28.py` | Comptage des circuits eulériens de K₅ et K₇ par programmation dynamique, puis insertion des doubles et rupture du cercle. Environ 1 s. |
+
+## 286 · PAINTING THE DIE : 48 marquages, mais deux dés seulement
+
+Son compte de 48 marquages (6 × 4 × 2) est exact, mais il compte des dés tenus en main. Les 24 rotations du cube ramènent les 48 marquages à **deux** dés, images l'un de l'autre dans un miroir : aucune rotation ne fait passer de l'un à l'autre.
+
+| Fichier | Rôle |
+|---|---|
+| `286/de.py` | Les 48 marquages, les 24 rotations construites, les orbites, le sens (déterminant des faces 1, 2, 3). Témoins : un marquage avec 1 face à 2 doit être refusé, un miroir doit changer de dé et aucune rotation ne le doit. Instantané. |
+
 ## 343 · EXERCISE FOR PRISONERS : 42 coups au lieu de 66
 
 Un taquin de quinze prisonniers à ranger en parcours de cavalier, coin inférieur droit vide, avec le plus d'hommes possible au repos et le moins de coups possible. Les comptes de Dudeney sont exacts (80 arrangements, 40 atteignables, 2 hommes au repos au plus), mais sa liste de paires contient une coquille (5-13 au lieu de 5-15), il ne trouve que 4 des **9** cibles, et ses **66** coups sont battus : **42** suffisent, et 42 est optimal.
@@ -453,6 +494,14 @@ python3 rejeu.py
 ```
 
 Correction du 18/10/2026 : la première version de `taquin.c` comptait 2 coups de plus par paire de tuiles inversées dans une ligne, ce qui surestime quand trois tuiles sont inversées. `controle_taquin.py` l'a pris en défaut (3 positions sur 300 résolues en 18 coups au lieu de 16). Le calcul corrigé redonne les mêmes nombres pour les 9 cibles, dont 42.
+
+## 363 · THE DOCTOR'S QUERY : 40 contre 1, et l'agitation ne sert à rien
+
+Un quart d'once d'alcool versé dans l'eau, puis un quart d'once du mélange reversé : le flacon d'alcool finit à 400/41 d'alcool pour 10/41 d'eau, 40 contre 1, reflet exact de l'autre flacon. Il y a toujours autant d'eau dans l'alcool que d'alcool dans l'eau, quelles que soient les quantités, dès que chaque flacon retrouve son volume ; et cela tient même si l'on reverse un quart d'once de composition quelconque.
+
+| Fichier | Rôle |
+|---|---|
+| `363/medecin.py` | Le calcul en fractions exactes, trois autres jeux de quantités, quatre compositions du retour. Témoin : si l'on ne reverse qu'un huitième d'once, l'égalité doit tomber. Le script de l'atelier ayant été perdu, celui-ci le refait. Instantané. |
 
 ## 365 · NEW MEASURING PUZZLE : onze est le minimum, et le second tonneau est indispensable
 
