@@ -2,9 +2,9 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 227, 238, 244, 247, 250, 252, 263, 266, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 390, 396, 401, 415.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 140, 142, 150, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 390, 396, 401, 415.
 
-Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
+Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 224, le 244 et le 343.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
 
@@ -297,6 +297,17 @@ Le taquin 3 × 3 à huit lettres. Ses 23 coups sont légaux et aboutissent ; 23 
 |---|---|
 | `219/taquin.py` | Rejeu de sa suite, parcours en largeur, comptage des chemins optimaux, diamètre. Témoins : sa suite avec deux coups intervertis, ou sans le dernier, doit être refusée. Instantané. |
 
+## 224 · THE MOTOR-GARAGE PUZZLE : 43 coups, à deux coups du pire
+
+Douze emplacements reliés en arbre (plan relevé sur la gravure), huit voitures ; une voiture se déplace d'aussi loin qu'elle veut par des cases libres, et il faut échanger les deux rangées. Sa séquence de 43 coups est légale et aboutit, et 43 est l'optimum exact ; il y a 99 264 séquences optimales (« there are other ways »). Les 19 958 400 positions sont toutes accessibles, et la plus éloignée du départ est à 45 coups : sa demande est à deux coups du maximum, et seules 3 986 positions sont aussi loin ou plus loin.
+
+| Fichier | Rôle |
+|---|---|
+| `224/garage.c` | Parcours en largeur jusqu'au but (`gcc -O2 garage.c`). Environ 12 s, 330 Mo de mémoire. |
+| `224/garage2.c` | Parcours complet : positions accessibles, répartition par distance, nombre de séquences optimales. Environ 13 s, 490 Mo. |
+| `224/garage3.c` | Exemples de positions à 45 coups. Environ 12 s, 330 Mo. |
+| `224/garage_verif.py` | Rejeu de sa séquence. Témoins : sans le dernier coup, avec deux coups intervertis, ou avec 6-H au lieu de 6-G, elle doit être refusée. Recoupement indépendant du C : les niveaux 0 à 4 du parcours, recalculés en Python, donnent 1, 8, 55, 250, 712. |
+
 ## 227 · CENTRAL SOLITAIRE : 18 coups au lieu de 19
 
 Le solitaire anglais à 33 trous, trou central vide au départ, une seule bille au centre à la fin, en le moins de coups possible (un coup = une bille qui enchaîne des sauts). Dudeney en fait 19 et ne pense pas qu'on puisse descendre plus bas ; **18 suffisent**. La littérature attribue les 18 coups à Ernest Bergholt, vers 1912 (non vérifié dans les sources d'époque). 17 est-il possible ? Question ouverte ici.
@@ -405,6 +416,17 @@ Double mixte, quatre couples, deux courts, trois jours, personne ne joue deux fo
 | `266/tennis8.py` | Recherche générale à huit couples ; écrit `tennis8.json`. Environ 15 s. |
 | `266/verifie.py` | Vérificateur indépendant, sans code commun avec la recherche, appliqué à sa grille et à `tennis8.json`. Témoins : deux dames échangées entre deux courts, et un jour rejoué, doivent être refusés. |
 | `266/tennisn.py` | La même recherche pour 4, 6, 8 et 10 couples : 6 est impossible (recherche complète, 0,1 s), 10 épuise son budget de 40 millions de nœuds sans conclure (environ 5 min). |
+
+## 268 · THE PEAL OF BELLS : 24 sonneries à quatre cloches, et sa promesse à cinq est tenue
+
+Une sonnerie juste : toutes les permutations une fois, aucune cloche ne saute de plus d'une place, jamais trois coups de suite à la première ni à la dernière place, et la sonnerie boucle. Sa sonnerie de quatre cloches est juste ; il y en a 24 au départ de 1234, 12 à lecture inverse près, 8 en identifiant aussi le miroir des places. Il dit en avoir construit à cinq et six cloches sans les donner : une recherche aveugle ne trouve rien en milliards de nœuds, mais en imposant la symétrie des vraies méthodes (la sonnerie se reproduit 24 rangées plus loin, les cloches renommées par un cycle d'ordre 5), une sonnerie de cinq cloches sort en un dixième de seconde. Six cloches : non tranché.
+
+| Fichier | Rôle |
+|---|---|
+| `268/cloches.py` | Contrôle de sa sonnerie, recensement des sonneries justes de quatre cloches et de leurs classes. Instantané. |
+| `268/cloches5sym.py` | Recherche d'une sonnerie de cinq cloches sous la symétrie d'ordre 5 ; écrit `peal5.json`. Instantané. |
+| `268/peal5.json` | La sonnerie de cinq cloches trouvée (120 rangées). |
+| `268/verifie.py` | Vérificateur indépendant des quatre règles. Témoins : deux rangées éloignées interverties, une rangée répétée, sa sonnerie à moitié lue à l'envers, une cloche trois fois en tête doivent être refusées ; la même sonnerie commencée ailleurs doit passer, et l'interversion des rangées 10 et 11 aussi (elle donne une autre sonnerie juste). |
 
 ## 269 · THREE MEN IN A BOAT : un tableau parfait, deux nombres faux
 
