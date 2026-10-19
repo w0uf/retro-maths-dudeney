@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 094, 101, 130, 136, 142, 157, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 032, 056, 060, 065, 079, 081, 082, 083, 088, 090, 093, 094, 101, 118, 128, 130, 132, 134, 136, 137, 142, 157, 164, 194, 206, 210, 227, 244, 252, 263, 266, 269, 275, 276, 279, 343, 365, 371, 377.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 244 et le 343.
 
@@ -103,6 +103,14 @@ Les neuf chiffres en deux nombres dont l'un divise l'autre : 89 solutions pour l
 |---|---|
 | `090/siecle.py` | Recherche exhaustive, ses onze écritures, ses racines numériques, ses éliminations, le classement des cibles de 1 à 200. Témoins : trois écritures fausses (mauvais dénominateur, mauvaise valeur, chiffres répétés) doivent être refusées. Environ 40 s. La première version n'essayait que des parties entières d'un ou deux chiffres, ce qui sous-comptait les cibles au-delà de 100 et plaçait cent au 34ᵉ rang. |
 
+## 093 · THE MYSTIC ELEVEN : sa réponse maximale dépend de la règle que « peu de gens savent »
+
+Nombres de neuf chiffres distincts divisibles par 11 : il y en a 296 640 ; le plus petit est 102 347 586, le plus grand 987 652 413, comme chez Dudeney. Il précise que peu de gens savent que la règle vaut aussi quand la différence des rangs est un multiple de 11 ; sa propre réponse maximale en dépend (différence 11) : avec une différence nulle seulement, on s'arrêterait à 987 645 230.
+
+| Fichier | Rôle |
+|---|---|
+| `093/onze.py` | Force brute sur les 10 × 9! arrangements, le plus grand à différence nulle. Témoins : deux nombres non divisibles doivent être refusés par la règle des rangs, et la règle doit concorder avec la division sur 200 000 nombres consécutifs. Environ 6 s. |
+
 ## 094 · THE DIGITAL CENTURY : sa réponse est la seule
 
 Placer des signes entre 1 2 3 4 5 6 7 8 9, sans changer l'ordre, pour faire 100, avec le moins de signes possible. Dudeney trouve 123 − 45 − 67 + 89 et « ne pense pas qu'elle soit jamais battue ». Le recensement des 390 625 dispositions (rien, +, −, ×, ÷ entre deux chiffres, sans parenthèses) le confirme : 101 expressions valent 100, et **une seule** n'a que trois signes, la sienne. À quatre signes, il y en a exactement deux.
@@ -119,6 +127,22 @@ Cinq bottes pesées deux à deux de toutes les façons : dix nombres, sans savoi
 |---|---|
 | `101/bottes.py` | Reconstruction exhaustive puis en fractions exactes ; balayage de 2 à 8 bottes, éprouvé d'abord sur le témoin {1, 4, 6, 7} / {2, 3, 5, 8} ; les 252 choix de cinq pesées, deux critères comparés ; les 80 erreurs simulées. Instantané. |
 
+## 118 · CIRCLING THE SQUARES : six dispositions, et la règle 4n + 6 est un théorème
+
+Dix cases en cercle, quatre nombres donnés ; pour deux voisines, la somme des carrés égale celle des deux opposées. L'écart des carrés de deux cases opposées est donc constant (192), au signe près ; ses cinq paires sortent des factorisations de 192, et il y a exactement **six** façons de compléter le cercle, comme il le dit. Sa remarque finale, « le nombre de cases doit être de la forme 4n + 6 », est exacte : le signe de l'écart alterne, donc la moitié du nombre de cases doit être impaire.
+
+| Fichier | Rôle |
+|---|---|
+| `118/cercle.py` | Les paires, le balayage complet des dispositions, 260 = 16² + 2² = 14² + 8². Une recherche directe, qui n'emploie que la condition, trouve des cercles de 6 et 10 cases et aucun de 4, 8 ou 12 (nombres distincts jusqu'à 60). Témoin : deux cases voisines échangées doivent être refusées. Instantané. |
+
+## 128 · A PROBLEM IN SQUARES : le défi de la raison 23 relevé
+
+Trois carrés en progression arithmétique de raison 5, puis 7, puis 13 : ses réponses sont exactes, et sa remarque (en entiers, la raison est toujours multiple de 24) aussi, d'où les fractions. Trois carrés rationnels de raison d, c'est un triangle rectangle rationnel d'aire d : d est un nombre congruent. Pour son défi, la raison 23, on trouve trois nombres à dix chiffres sur le dénominateur 144 613 560, issus du triangle engendré par m = 156², n = 133².
+
+| Fichier | Rôle |
+|---|---|
+| `128/planches.py` | Ses trois réponses en fractions exactes, le balayage des raisons entières, le triangle d'aire 23 et sa progression. Témoins : une réponse altérée d'une unité et un triangle mal recopié doivent être refusés. Instantané. |
+
 ## 130 · THE SCULPTOR'S PROBLEM : sa recette oublie une condition
 
 Deux socles cubiques inégaux dont la somme des arêtes égale la somme des volumes. L'équation se réduit à x² − xy + y² = 1. La réponse de Dudeney est bien la plus petite (plus petit dénominateur 7, deux solutions à ce dénominateur), ses deux remarques préalables sont justes, sa loi des dénominateurs aussi. Mais sa recette à trois générateurs a > b > c ne marche que si **a = b + c** : sur 9 139 triplets, 8 774 ne donnent rien. Son exemple « plein de neuf » respecte la condition. Et la gravure dessine deux socles dans le rapport 1,27, quand la réponse exige 2,67.
@@ -128,6 +152,22 @@ Deux socles cubiques inégaux dont la somme des arêtes égale la somme des volu
 | `130/socles.py` | Toutes les vérifications en fractions exactes, jusqu'au dénominateur 300 ; mesure de la gravure. Témoins : deux socles plus petits que le pied doivent être refusés, et le dénominateur 21 doit être signalé. N'imprime pas les fractions de la réponse. |
 | `130/q130.png` | La gravure du livre (transcription Gutenberg, domaine public). |
 
+## 132 · THE NINE TREASURE BOXES : 3 360, la plus petite et la seule
+
+Neuf coffres carrés en trois progressions de même raison, le premier contenant au plus douze doublons. 3 360 est la plus petite raison qui porte trois progressions de trois carrés, et elle en porte exactement trois, les siennes. Sans la clause des douze doublons, il y a une infinité de réponses (multiplier les racines par k) et plusieurs familles indépendantes (43 680, 127 680…) ; avec elle, une seule raison du balayage convient.
+
+| Fichier | Rôle |
+|---|---|
+| `132/coffres.py` | Toutes les progressions de trois carrés aux racines jusqu'à 4 000, classées par raison et par famille. Témoin : un coffre altéré d'une unité doit être refusé. Environ 1 s. |
+
+## 134 · THE BANKER'S PUZZLE : le polynôme d'Euler, et la livre en est la borne
+
+Le banquier dépose 40 pièces, le client en ajoute de 1 à 40, le banquier fait transférer le carré du nombre précédent : le total vaut m² + m + 41, premier pour les 40 coups. La clause « pas plus d'une livre » est exactement la borne du polynôme (m = 40 donne 41²), et seuls les dépôts 1, 2, 4, 10, 16, 40 rendent la recette infaillible (nombres chanceux d'Euler) ; seul 40 couvre la livre.
+
+| Fichier | Rôle |
+|---|---|
+| `134/banquier.py` | Les 40 coups, le polynôme, la recherche des dépôts possibles. Témoins : les dépôts 39, 41 et 16 doivent échouer, 41 pièces ajoutées doivent faire perdre, le test de primalité doit refuser 1681 et 91. Instantané. |
+
 ## 136 · THE SULTAN'S ARMY : sa règle du facteur 2 n'est écrite qu'à moitié
 
 Le plus petit effectif rangeable en deux carrés parfaits de douze façons. Sa réponse est la plus petite, ses douze paires sont exactes et complètes, ses lois sur les premiers 4n + 1 et 4n − 1 passent. Mais sa règle « doubler ne change rien, sauf quand cela double un carré » oublie le versant symétrique : doubler le double d'un carré fait perdre une façon (50 → 100). Telle qu'il l'écrit : 316 contre-exemples sous 200 000 ; complétée : aucun.
@@ -135,6 +175,14 @@ Le plus petit effectif rangeable en deux carrés parfaits de douze façons. Sa r
 | Fichier | Rôle |
 |---|---|
 | `136/sultan.py` | Crible des décompositions jusqu'à 400 000, ses lois une à une, sa réponse et ses douze paires (le nombre n'est pas imprimé), la variante avec le carré nul. Témoins : les comptes de son texte (130, 25, 50, 15) faits à la main. Instantané. |
+
+## 137 · A STUDY IN THRIFT : une coquille dans son tableau
+
+Ses six nombres sont exactement les six premiers nombres à la fois carrés et triangulaires après 1 ; carrés, triangles et décompositions en trois triangles sont justes. Mais pour 1225, « deux triangles de côtés 36 et 34 » fait 1261 : il faut 35 et 34 (ou 45 et 19). La récurrence a(n) = 34 a(n−1) − a(n−2) + 2 tient, et sa phrase « tout entier est somme d'au plus trois triangulaires » (théorème d'Eureka de Gauss) est vérifiée jusqu'à 200 000.
+
+| Fichier | Rôle |
+|---|---|
+| `137/epargne.py` | Son tableau ligne par ligne, la suite des carrés triangulaires, la récurrence, le théorème d'Eureka jusqu'à 200 000. Témoin : le contrôle doit refuser la ligne de 1225, et elle seule. Environ 5 s. |
 
 ## 142 · THE SILK PATCHWORK : les sept découpages
 
