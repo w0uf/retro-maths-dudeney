@@ -2,9 +2,9 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 032, 046, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 295, 296, 297, 298, 301, 309, 310, 343, 345, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 414, 415, 419.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 032, 046, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 291, 295, 296, 297, 298, 301, 309, 310, 313, 314, 326, 327, 333, 337, 338, 339, 343, 345, 346, 348, 349, 350, 351, 354, 355, 356, 357, 358, 359, 360, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 414, 415, 419.
 
-Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 224, le 244 et le 343.
+Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; python-chess pour 348 à 357 ; un compilateur C pour le 224, le 244, le 343 et le 350.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
 
@@ -552,6 +552,15 @@ Son compte de 48 marquages (6 × 4 × 2) est exact, mais il compte des dés tenu
 |---|---|
 | `286/de.py` | Les 48 marquages, les 24 rotations construites, les orbites, le sens (déterminant des faces 1, 2, 3). Témoins : un marquage avec 1 face à 2 doit être refusé, un miroir doit changer de dé et aucune rotation ne le doit. Instantané. |
 
+## 291 · THE GRAND LAMA'S PROBLEM : parmi les découpes en moulin, la spirale est la seule
+
+Les gemmes sur les quatre premières cases de la grande diagonale. Parmi les 1 191 découpes « en moulin » (quatre parts connexes de 16 cases, images l'une de l'autre par quart de tour ; 596 à miroir près), une seule donne une gemme à chaque part, à miroir près : la spirale du livre. Des 70 façons de poser quatre gemmes sur la diagonale, 12 sont impossibles ; la sienne et son miroir sont celles qui admettent le moins de découpes (2 chacune), la plus généreuse en admet 666. Réserve : seules les découpes en moulin sont inventoriées.
+
+| Fichier | Rôle |
+|---|---|
+| `291/grand_lama.py` | Filtre les découpes selon les gemmes, tableau des 70 dispositions. Témoins : une spirale « simple » et la part du livre retouchée d'une case sont refusées. Environ 1 s. |
+| `291/quatre_cavaliers.py` | L'inventaire des découpes en moulin, partagé avec le 339. |
+
 ## 295 · THE EIGHT ROOKS : le nombre qu'il disait « pas encore déterminé »
 
 Huit tours qui tiennent tout l'échiquier sans qu'aucune en garde une autre : 8! = 40 320, comme au corrigé. Son « évidemment une tour par rangée et par colonne » est contrôlé par l'essai complet sur les damiers de 2 à 6. Le compte à retournements et réflexions près, qu'il déclare non déterminé et difficile, est **5 282**, obtenu deux fois : en rangeant les dispositions par familles, et par le lemme de Burnside (40 320, 12, 384, 12, 0, 0, 764 et 764 dispositions fixes). Diviser par huit ne marche pas : 44 familles n'ont que deux membres, 418 en ont quatre. Suite de 1 à 8 cases de côté : 1, 1, 2, 7, 23, 115, 694, 5 282.
@@ -608,6 +617,72 @@ Trois moutons sur seize enclos, chaque enclos occupé ou en ligne avec un mouton
 |---|---|
 | `310/moutons.py` | Essai complet des dispositions, familles, avec et sans écran. Témoins : C E L et le couple A, P sont refusés ; l'exemple de la gravure (D, E, O) est accepté. Instantané. |
 
+## 313 · QUEENS AND BISHOP PUZZLE : Wallis et Planck avaient les seules, et le fou de la fig. 2 se trompe
+
+Toutes les pièces font écran. Le casse-tête (fou en a2, quatre dames) a 6 solutions, dont la sienne. Quatre dames et un cavalier : sur un peu plus de 38 millions de dispositions, une seule famille tient l'échiquier, celle de Wallis (« la seule connue »). Trois dames et deux tours : 92 familles, une seule où toutes les pièces sont gardées, celle de Planck (« la seule, je crois »). Trois dames, une tour et un fou : 4 familles, une seule sans pièce gardée, la sienne. Sur la fig. 2, sa liste des cases pour une cinquième pièce est juste pour la dame (12), la tour (2), le pion (1) et le roi (4), pas pour le fou : 5 cases et non 8, car en c6, d5 et g2 le fou coupe la ligne d'une dame.
+
+| Fichier | Rôle |
+|---|---|
+| `313/dames_et_fou.py` | Contrôle des cinq figures, cases de la fig. 2, balayages à quatre dames + cavalier, fou ou tour. Témoin : sur les trois cases fautives, une dame convient et un fou non. Environ 20 min (argument `C` : le cavalier seul, 4 min ; `X` : les figures seules). |
+| `313/dames_et_fou2.py` | Balayages à trois dames + deux pièces, avec préfiltre. Témoins : la disposition de Planck privée d'une tour est refusée ; la sienne (fig. 5) a bien des pièces non gardées. Environ 10 s. |
+
+## 314 · THE SOUTHERN CROSS : 114 dispositions, 42 solutions, et cinq planètes jusqu'à 121 étoiles
+
+La croix de départ laisse exactement les 10 étoiles pointées de la gravure. Cinq planètes couvrant les 81 étoiles : 114 dispositions, 21 familles (ses « plusieurs façons »), quatre ne suffisent jamais. Le casse-tête tel qu'il est posé a 42 solutions, dont la sienne ; la solution « plus facile » qu'il écarte (une planète reste en place) en a 8 ; avec trois déplacements ou moins, aucune. Cinq planètes suffisent encore sur 10 × 10 et 11 × 11, plus sur 12 × 12 (recherche complète).
+
+| Fichier | Rôle |
+|---|---|
+| `314/croix_du_sud.py` | Toutes les dispositions à cinq planètes, familles, solutions du casse-tête. Témoins : la croix de départ et sa solution privée d'une planète sont refusées. Environ 2 s. |
+| `314/croix_du_sud2.py` | Carrés de 9 à 12 : un exemple, ou 0 après recherche complète ; chaque exemple est recontrôlé à part. Témoin : l'exemple du 11 × 11 ne couvre pas le 12 × 12. Environ 35 s. |
+
+## 326 · A NEW COUNTER PUZZLE : ses 18 coups sont un minimum
+
+Sa suite de 18 glissades est valable et minimale (il ne le revendique pas) ; il y a 256 suites minimales. La recherche en largeur visite les 99 positions atteignables.
+
+| Fichier | Rôle |
+|---|---|
+| `326/jetons_et_fous.py` | Recherche en largeur et rejeu de sa suite (et de celle du 327). Témoins : sa suite avec les deux premiers coups intervertis, ou privée du dernier, est refusée. Environ 1 s. |
+
+## 327 · A NEW BISHOP'S PUZZLE : 36 coups, minimum, et 307 570 façons
+
+Sa partie de 36 coups (18 par camp, en alternant) est valable et minimale ; il y a 307 570 solutions minimales en alternant, et sans l'alternance le minimum reste 36. Les deux couleurs de cases sont deux exemplaires indépendants du n° 326 : 36 = 2 × 18.
+
+| Fichier | Rôle |
+|---|---|
+| `327/jetons_et_fous.py` | Le même programme que le 326. Témoins : un coup qui n'est pas un coup de fou, et ses deux premiers coups blancs intervertis, sont refusés. Environ 1 s. |
+
+## 333 · THE QUEEN'S JOURNEY : il a raison, au centième de pouce
+
+Sur les 718 948 trajets de cinq coups permis, le plus long est le sien, seul, d1-h1-a8-h8-h2-c7 = 34 + 24√2 = 67,94 pouces ; le deuxième, seul aussi, est celui « de la plupart », d1-h1-h8-a1-a8-g8 = 48 + 14√2 = 67,80 ; le troisième est sous 67. L'écart vaut 10√2 − 14. Sans la règle du croisement, on dépasserait 73 pouces. En quatre coups, le début du trajet « de la plupart » est le meilleur, et seul. De toutes les cases de départ, d1 et e1 (et leurs six images) sont les pires ; d'un coin, on gagne six pouces.
+
+| Fichier | Rôle |
+|---|---|
+| `333/voyage_dame.py` | Tous les trajets, avec et sans la règle du croisement ; trajets plus courts ; les 64 cases de départ. Témoin : le trajet le plus long sans la règle doit être absent de la recherche avec la règle. Environ 1 min. |
+
+## 337 · THE FOUR KANGAROOS : un seul partage de chaque moitié
+
+Chaque moitié 4 × 8 doit porter deux circuits de 16 sauts, un par coin. 55 123 domaines de 16 cases portent un circuit passant par le coin gauche, mais un seul partage de la moitié convient : `GDGDGDGD` sur les deux rangées extérieures, `DGDGDGDG` sur les deux autres. Chaque domaine porte 8 circuits : 64 tracés par moitié, 4 096 solutions pour l'échiquier. Le quart 4 × 4 n'en porte aucun.
+
+| Fichier | Rôle |
+|---|---|
+| `337/kangourous.py` | Énumération des circuits par domaine, partages. Témoins : le quart 4 × 4 est refusé, le domaine trouvé avec une case échangée aussi. Environ 3 s. |
+
+## 338 · THE BOARD IN COMPARTMENTS : 36 tours, et un damier oublié
+
+Ses affirmations générales tiennent : 16 parcours sur 4 × 3, aucun sur 4 × 4, 3 × 3, 2 × n ; 8 tours fermés sur 5 × 6, aucun sur 4 × 6, 4 × 7, 3 × 8. Mais « le plus petit est 6 sur 5 » oublie le 3 × 10, aussi de 30 cases, qui porte 16 tours fermés (3 × 12 : 176). Le casse-tête a 36 tours fermés ; ses quatre cases étoilées sont dans tous, et les raccords se font en quatre familles de 9.
+
+| Fichier | Rôle |
+|---|---|
+| `338/compartiments.py` | Chemins dans chaque compartiment, assemblage par programmation dynamique, tours fermés des petits damiers. Témoins : les damiers sans parcours de son énoncé doivent donner 0, et deux cases voisines ne sont pas un saut. Environ 1 min. |
+
+## 339 · THE FOUR KNIGHTS' TOURS : sa découpe est la seule, parmi les découpes en moulin
+
+Le quart 4 × 4 ne porte ni tour ni parcours. Sur les 1 191 découpes en moulin (596 à miroir près), une seule porte un tour fermé du cavalier, à miroir près : celle de Dudeney, et le tour y est unique (son « only one possible route »). 34 parts admettent un parcours ouvert. Réserve : les parts retournées et les translations ne sont pas inventoriées.
+
+| Fichier | Rôle |
+|---|---|
+| `339/quatre_cavaliers.py` | Inventaire des découpes, tours fermés et parcours ouverts. Témoins : le carré 4 × 4, et sa part avec une case déplacée, sont refusés. Environ 1 s. |
+
 ## 343 · EXERCISE FOR PRISONERS : 42 coups au lieu de 66
 
 Un taquin de quinze prisonniers à ranger en parcours de cavalier, coin inférieur droit vide, avec le plus d'hommes possible au repos et le moins de coups possible. Les comptes de Dudeney sont exacts (80 arrangements, 40 atteignables, 2 hommes au repos au plus), mais sa liste de paires contient une coquille (5-13 au lieu de 5-15), il ne trouve que 4 des **9** cibles, et ses **66** coups sont battus : **42** suffisent, et 42 est optimal.
@@ -636,6 +711,104 @@ Deux pions à leurs deux bords, jouant l'un ou l'autre jusqu'à la 8e rangée : 
 | Fichier | Rôle |
 |---|---|
 | `345/pions.py` | Récurrence, ses quatre cas en coefficients binomiaux. Témoin : la même récurrence sans double pas doit donner 924, et pas 2 100. Instantané. |
+
+## 346 · SETTING THE BOARD : le calcul est juste, et le plateau compte double
+
+8! × 2 × 2 × 2 = 322 560 façons par camp, 104 044 953 600 pour les deux, et 208 089 907 200 en comptant les deux poses du plateau, comme au corrigé : environ 6 594 ans à une mise en place par seconde. Sa règle (des pièces semblables mais distinctes) est recontrôlée par énumération sur une petite armée.
+
+| Fichier | Rôle |
+|---|---|
+| `346/mise_en_place.py` | Le calcul étape par étape, énumération d'une petite armée. Témoins : sans retourner le plateau, on n'a que la moitié ; en confondant les pièces semblables, une seule pose. Instantané. |
+
+## 348 · THE ROOKERY : mat en 28 coups, pas 32
+
+Sa suite de 31 glissements suivie de Txd6 mat est valable, et les Noirs n'ont qu'un coup légal à chaque tour. Mais sa position finale exacte s'atteint en 27 glissements : **mat en 28 coups**, par une suite unique (`7 8 1 7 5 6 8 5 3 4 6 8 5 3 4 2 7 1 3 4 2 7 1 2 8 6 7`, puis Txd6 mat), rejouée avec python-chess, même position finale que la sienne. Avec la tour 8 en d5 et le centre vide : 28 glissements, 29 coups. Son avertissement sur le sens de rotation est juste : dans le sens d'origine, la cible est inaccessible (parité du taquin). 181 440 positions en tout.
+
+| Fichier | Rôle |
+|---|---|
+| `348/freux.py` | Taquin par recherche en largeur, rejeu des parties complètes sur un vrai échiquier (python-chess). Témoins : un glissement impossible et sa suite privée d'un coup sont refusés. Instantané. |
+
+## 349 · STALEMATE : sa partie est légale et c'est un pat
+
+Sa partie de douze coups, rejouée avec python-chess : légale, aucune prise, et les Blancs sont pat avec les trente-deux pièces sur l'échiquier. Que ce soit « la meilleure solution possible » n'est pas vérifié (il faudrait parcourir toutes les parties d'une vingtaine de demi-coups). Avec des prises, la partie de dix coups attribuée à Sam Loyd (attribution de mémoire, sans source vérifiée) est légale aussi : pat des Noirs, vingt-six pièces.
+
+| Fichier | Rôle |
+|---|---|
+| `349/pat.py` | Rejeu des deux parties. Témoins : sa partie privée du dernier coup noir n'est pas pat ; un coup illégal est refusé. Instantané. |
+
+## 350 · THE FORSAKEN KING : un coup sur vingt, puis un coup sur trente
+
+Recherche exhaustive (roques et promotions compris) : pas de mat en 5, mat en 6. Des 20 premiers coups, **1. e4** est le seul qui garde le mat en 6 ; après chacune des 5 réponses noires, **2. Dg4** est le seul sur 30. Son tableau est complet : dans les 62 branches, le coup qu'il prescrit (3. Dg7, ou Dd7 si le roi est sur la colonne f ; 4. Fb5 ou b3 si le roi est revenu sur la 8e rangée, sinon d4) est toujours gagnant. La carte des 40 cases où un roi seul peut se tenir face à l'armée au complet : mat en 6 sur 37, en 3 sur h4 (1. d4 seul), en 5 sur a4, en 7 sur e4.
+
+| Fichier | Rôle |
+|---|---|
+| `350/roi_abandonne.c` | Le solveur exhaustif « mat en n » (table de transposition) et la carte des cases. |
+| `350/controle.py` | Compile et lance le solveur, puis contrôle ses sorties et son tableau branche par branche. Témoin indépendant (python-chess) : une branche jouée jusqu'au mat par recherche exhaustive, et une position hors de son tableau sans mat en deux. Environ 10 s ; `python3 controle.py carte` ajoute la carte (plusieurs minutes). |
+
+## 351 · THE CRUSADER : la partie est légale, et le roi n'avait qu'une case où mourir
+
+Sa partie, rejouée avec python-chess : un seul cavalier blanc joue, quinze prises en seize coups, et il revient sur sa case ; il ne reste aux Noirs que le roi, en h4. Recherche exhaustive : pas de mat en deux ; mat en trois, et des 19 premiers coups **seul 17. d4** le force ; ses deux variantes matent. Sur les 40 cases possibles du roi noir, h4 est la seule où le mat se fait en trois (carte dans le dossier 350).
+
+| Fichier | Rôle |
+|---|---|
+| `351/croise.py` | Rejeu de la partie, recherche exhaustive des mats en deux et trois. Témoins : la partie avec un coup illégal est refusée ; 17. e4 ne force pas le mat en trois. Instantané. |
+
+## 354 · AN AMAZING DILEMMA : b2, et sa jumelle g7
+
+Des 54 cases possibles pour le roi noir, une seule n'admet aucun mat, quelle que soit la promotion et que la tour noire soit prise ou non : b2, comme au corrigé. Il n'y existe aucune position de mat, et le parcours de toutes les positions réellement atteignables (585 469) n'en trouve aucun. Sur les 53 autres, M. White mate en 2 à 9 coups. La seule autre case sans mat possible est g7, où se tient le roi blanc.
+
+| Fichier | Rôle |
+|---|---|
+| `354/dilemme.py` | Mats « statiques » pour chaque case du roi noir, et la case g7. Témoin : un mat connu (roi noir e8) est reconnu. Environ 30 s. |
+| `354/dilemme2.py` | Parcours en largeur des positions atteignables, Blancs jouant seuls. Témoin : le même parcours trouve le mat en deux coups pour la case e8. Environ 50 s. |
+
+## 355 · CHECKMATE! : la prise en passant, et rien d'autre
+
+Analyse rétrograde : une seule position précédente légale, donc un seul dernier coup, exf6 en passant, mat. Le coup noir d'avant est imposé (…f7-f5, seul coup légal, les Noirs étant en échec), et le coup blanc d'avant aussi (e4-e5+, échec à la découverte du fou). Trois demi-coups certains : 1. e5+ f5 2. exf6 e.p.#.
+
+| Fichier | Rôle |
+|---|---|
+| `355/echec_et_mat.py` | Énumération des positions précédentes (toutes pièces, toutes prises, prise en passant comprise ; promotions exclues, impossibles ici). Témoins : la suite reconstituée redonne la gravure ; la position privée du pion f6 n'a aucun passé. Instantané. |
+
+## 356 · QUEER CHESS : seize dispositions, deux à symétrie près, toutes impossibles en partie
+
+Roi noir sur une case centrale, deux tours et un cavalier, échec sans aucun coup : 16 dispositions (4 par case), 2 à symétrie près. Dans toutes, l'échec est donné par les deux tours à la fois : position « impossible au jeu d'échecs ». Ailleurs : 4 399 dispositions dans un coin, de 1 576 à 1 691 sur un bord, 2 à 4 par case à l'intérieur.
+
+| Fichier | Rôle |
+|---|---|
+| `356/echecs_bizarres.py` | Essai de toutes les dispositions, pour toutes les cases du roi. Témoin : l'une de ses dispositions privée du cavalier laisse un coup au roi. Environ 40 s. |
+
+## 357 · ANCIENT CHINESE PUZZLE : une seule solution, et un pat en embuscade
+
+Les trois pièces blanches jouant chacune une fois : 2 809 lignes de jeu, un seul premier coup force le mat, 1. Td6 Rc8 2. Ra7 Rc7 3. Tac6#, réponses noires toutes forcées. Sans la condition, mat en deux de deux façons (1. Td6 et 1. Ta8+). Des 22 premiers coups, 12 font pat. Fausse piste : 1. Te6 Rc8 2. Rc6 mate si 2… Rd8, pas si 2… Rb8.
+
+| Fichier | Rôle |
+|---|---|
+| `357/casse_tete_chinois.py` | Toutes les lignes, premiers coups qui forcent le mat, mats en deux sans la condition (recherche exhaustive). Témoin : le roi noir de la gravure, s'il avait le trait, serait pat. Environ 1 s. |
+
+## 358 · THE SIX PAWNS : sa formule, de 3 à 9
+
+Un nombre pair de cases vides dans chaque ligne, c'est un nombre pair de pions (sur un damier impair, Dudeney demande un nombre impair de cases vides : même condition). Comptage rangée par rangée : 18 816 sur l'échiquier, et sa formule 6·C(n, 3)² tient pour tous les côtés de 3 à 9. Quatre pions : 784 = 28². Huit pions : 586 040. Une disposition de six pions sur 3 985 convient.
+
+| Fichier | Rôle |
+|---|---|
+| `358/six_pions.py` | Comptage par parités de colonnes, recoupé par force brute sur les petits damiers. Témoin : la lecture littérale « nombre pair de cases vides » sur un damier impair ne donne pas la formule. Quelques secondes. |
+
+## 359 · COUNTER SOLITAIRE : seuls les jetons 1 à 8 peuvent rester
+
+Ses 15 prises sont valables, et le n° 1 reste seul après avoir fait la dernière. Exploration complète : seuls les jetons 1 à 8 peuvent finir seuls (aucun des 9 à 16), et sur deux cases seulement de la rangée du haut, la 3e depuis la gauche et la 3e depuis la droite.
+
+| Fichier | Rôle |
+|---|---|
+| `359/solitaires.py` | Rejeu de ses deux suites (359 et 360), exploration du plateau 3 × 8, invariant de l'échiquier. Témoins : une prise par-dessus un jeton non voisin, et une prise vers une case occupée, sont refusées. Environ 1 s. |
+
+## 360 · CHESSBOARD SOLITAIRE : son « je ne crois pas » est un théorème
+
+Ses 30 prises sont valables ; restent le 25 et le 19, qui n'a jamais bougé. Qu'un seul jeton ne puisse rester se démontre : en coloriant les cases par (rangée + colonne) mod 3, les trois compteurs de départ sont pairs, chaque prise change la parité des trois, et un jeton seul donnerait 1, 0, 0. Pour deux survivants, 210 paires de cases sur 2 016 respectent l'invariant ; la sienne en est. Réserve : on n'a pas exploré si les 210 sont toutes atteignables.
+
+| Fichier | Rôle |
+|---|---|
+| `360/solitaires.py` | Le même programme que le 359. Témoin supplémentaire : sa suite privée de la dernière prise laisse trois jetons. Environ 1 s. |
 
 ## 363 · THE DOCTOR'S QUERY : 40 contre 1, et l'agitation ne sert à rien
 
