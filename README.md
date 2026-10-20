@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 032, 046, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 343, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 414, 415, 419.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 032, 046, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 295, 296, 297, 298, 301, 309, 310, 343, 345, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 414, 415, 419.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; un compilateur C pour le 224, le 244 et le 343.
 
@@ -552,6 +552,62 @@ Son compte de 48 marquages (6 × 4 × 2) est exact, mais il compte des dés tenu
 |---|---|
 | `286/de.py` | Les 48 marquages, les 24 rotations construites, les orbites, le sens (déterminant des faces 1, 2, 3). Témoins : un marquage avec 1 face à 2 doit être refusé, un miroir doit changer de dé et aucune rotation ne le doit. Instantané. |
 
+## 295 · THE EIGHT ROOKS : le nombre qu'il disait « pas encore déterminé »
+
+Huit tours qui tiennent tout l'échiquier sans qu'aucune en garde une autre : 8! = 40 320, comme au corrigé. Son « évidemment une tour par rangée et par colonne » est contrôlé par l'essai complet sur les damiers de 2 à 6. Le compte à retournements et réflexions près, qu'il déclare non déterminé et difficile, est **5 282**, obtenu deux fois : en rangeant les dispositions par familles, et par le lemme de Burnside (40 320, 12, 384, 12, 0, 0, 764 et 764 dispositions fixes). Diviser par huit ne marche pas : 44 familles n'ont que deux membres, 418 en ont quatre. Suite de 1 à 8 cases de côté : 1, 1, 2, 7, 23, 115, 694, 5 282.
+
+| Fichier | Rôle |
+|---|---|
+| `295/tours.py` | Familles et Burnside pour les côtés 1 à 8, contrôle exhaustif de son « évidemment ». Témoins : une rangée pleine de tours (qui se gardent) est refusée, et 40 320 / 8 ne redonne pas 5 282. Environ 2 s. |
+
+## 296 · THE FOUR LIONS : sa liste est celle des plus petits représentants
+
+Quatre lions sur 4 × 4, un par rangée et par colonne, à retournements près : 7 familles, comme au corrigé, et sa liste (1234, 1243, 1324, 1342, 1432, 2143, 2413) est exactement, et dans l'ordre, celle du plus petit représentant de chaque famille. Le piège : 24 / 8 = 3 tombe juste et c'est faux, car une seule famille (1342) a huit membres ; les autres en ont quatre ou deux.
+
+| Fichier | Rôle |
+|---|---|
+| `296/tours.py` | Le même programme que le 295 (la partie « côté 4 »). Mêmes témoins. Environ 2 s. |
+
+## 297 · BISHOPS—UNGUARDED : huit fous, et seulement sur les deux rangées du milieu
+
+La portée d'un fou vaut 7 sur les 28 cases du bord, 9 sur 20 cases, 11 sur 12, 13 sur les 4 du centre. Les deux couleurs étant indépendantes, on cherche par couleur : 3 fous n'y suffisent jamais, 4 oui, d'où **8** fous, comme au corrigé ; 108 × 108 = 11 664 dispositions, dont 72 × 72 = 5 184 sans aucun fou gardé. Huit fous alignés ne couvrent l'échiquier que sur la 4e ou la 5e rangée. Sur les damiers de 2 à 8, le minimum est toujours le côté.
+
+| Fichier | Rôle |
+|---|---|
+| `297/fous.py` | Essai complet par couleur, pièces faisant écran ; contrôle de ses deux diagrammes (297 et 298). Témoins : son diagramme du 298 privé d'un fou quelconque est refusé ; les huit fous alignés ne sont pas tous gardés. Environ 3 s. |
+
+## 298 · BISHOPS—GUARDED : dix fous, son diagramme et sa variante
+
+Chaque case tenue et chaque fou gardé : aucune disposition de 4 fous par couleur ne convient, il en faut 5, soit **10**, comme au corrigé ; 104 × 104 = 10 816 dispositions. Son diagramme (4e et 5e rangées, colonnes b, c, d, f, g) est valable, et sa variante aussi : les deux fous du milieu du groupe de six, qui « ne servent qu'à protéger », l'un monté d'une case, l'autre descendu.
+
+| Fichier | Rôle |
+|---|---|
+| `298/fous.py` | Le même programme que le 297. Mêmes témoins. Environ 3 s. |
+
+## 301 · THE EIGHT STARS : une seule solution, et c'est la sienne
+
+Des 92 solutions des huit dames, 12 évitent les deux grandes diagonales (32 en posent une dame, 48 deux, aucune trois), et une seule passe par l'étoile imposée : 5 8 4 1 7 2 6 3, son diagramme. Les 12 forment deux familles, de 8 et de 4 aspects, comme il le dit ; celle de 4 (3 5 2 8 1 7 4 6) est la seule famille symétrique des 12 familles des huit dames. Chaque case permise est sur 1, 2 ou 3 solutions ; 16 cases donnent une solution unique. Damiers de 4 à 10, diagonales interdites : 2, 0, 4, 0, 12, 8, 12 solutions.
+
+| Fichier | Rôle |
+|---|---|
+| `301/etoiles.py` | Filtrage des 92 solutions, familles, carte des cases, autres tailles. Témoins : une solution des huit dames qui touche une diagonale est écartée, une disposition qui s'attaque aussi. Instantané. |
+
+## 309 · THE FORTY-NINE COUNTERS : quatre découpages en tout
+
+Son carré est valable (jamais deux lettres ni deux chiffres pareils sur une ligne, une colonne ou une diagonale, petites diagonales comprises). Chaque lettre y occupe une solution des sept dames. Sur les 40 solutions des sept dames, il n'y a que **4** façons d'en prendre sept qui recouvrent le damier ; dans chacune, une lettre se décale du même nombre de colonnes (2, 3, 4 ou 5) à chaque rangée. Lettres et chiffres compatibles : 12 couples, soit 304 819 200 carrés en nommant lettres et chiffres de toutes les façons. Le sien : lettres au pas de 2, chiffres au pas de 4. Damiers de 4, 6 et 8 : aucun découpage ; de 5 : deux.
+
+| Fichier | Rôle |
+|---|---|
+| `309/jetons49.py` | Contrôle de son carré, recherche exhaustive des découpages, couples compatibles. Témoin : son carré avec deux jetons de la première colonne échangés est refusé. Instantané. |
+
+## 310 · THE THREE SHEEP : son tableau et ses cinq remarques
+
+Trois moutons sur seize enclos, chaque enclos occupé ou en ligne avec un mouton : 47 familles à retournements près, et son tableau de quatorze lignes les donne toutes, sans doublon. Ses cinq remarques tiennent : 30 familles perdantes ; 320 + 240 = 560 dispositions en tout ; 3 façons avec deux moutons (AK, BN, FG) ; 2 gagnantes sans moutons en ligne (AGN, AHO) ; une seule perdante dans ce cas, C E L. Que les moutons se masquent ou non (dames qui font écran), les nombres sont les mêmes.
+
+| Fichier | Rôle |
+|---|---|
+| `310/moutons.py` | Essai complet des dispositions, familles, avec et sans écran. Témoins : C E L et le couple A, P sont refusés ; l'exemple de la gravure (D, E, O) est accepté. Instantané. |
+
 ## 343 · EXERCISE FOR PRISONERS : 42 coups au lieu de 66
 
 Un taquin de quinze prisonniers à ranger en parcours de cavalier, coin inférieur droit vide, avec le plus d'hommes possible au repos et le moins de coups possible. Les comptes de Dudeney sont exacts (80 arrangements, 40 atteignables, 2 hommes au repos au plus), mais sa liste de paires contient une coquille (5-13 au lieu de 5-15), il ne trouve que 4 des **9** cibles, et ses **66** coups sont battus : **42** suffisent, et 42 est optimal.
@@ -572,6 +628,14 @@ python3 rejeu.py
 ```
 
 Correction du 18/10/2026 : la première version de `taquin.c` comptait 2 coups de plus par paire de tuiles inversées dans une ligne, ce qui surestime quand trois tuiles sont inversées. `controle_taquin.py` l'a pris en défaut (3 positions sur 300 résolues en 18 coups au lieu de 16). Le calcul corrigé redonne les mêmes nombres pour les 9 cibles, dont 42.
+
+## 345 · THE TWO PAWNS : 2 100, retrouvé sans sa méthode
+
+Deux pions à leurs deux bords, jouant l'un ou l'autre jusqu'à la 8e rangée : la récurrence position par position donne **2 100** suites, comme au corrigé, et ses quatre cas (aucun double pas, l'un, l'autre, les deux) font 924 + 462 + 462 + 252. Sans le double pas, on aurait C(12, 6) = 924.
+
+| Fichier | Rôle |
+|---|---|
+| `345/pions.py` | Récurrence, ses quatre cas en coefficients binomiaux. Témoin : la même récurrence sans double pas doit donner 924, et pas 2 100. Instantané. |
 
 ## 363 · THE DOCTOR'S QUERY : 40 contre 1, et l'agitation ne sert à rien
 
