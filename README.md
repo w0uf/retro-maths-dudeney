@@ -2,9 +2,9 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 025, 032, 044, 046, 056, 060, 061, 063, 065, 071, 078, 079, 081, 082, 083, 085, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 173, 187, 188, 194, 206, 210, 214, 218, 219, 224, 227, 233, 238, 244, 247, 250, 251, 252, 263, 266, 268, 269, 273, 275, 276, 279, 283, 285, 286, 291, 295, 296, 297, 298, 301, 309, 310, 313, 314, 326, 327, 333, 337, 338, 339, 343, 345, 346, 348, 349, 350, 351, 354, 355, 356, 357, 358, 359, 360, 363, 364, 365, 371, 374, 375, 377, 385, 386, 387, 390, 396, 399, 401, 404, 414, 415, 419, 420, 421.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 025, 032, 044, 046, 056, 060, 061, 063, 065, 071, 078, 079, 081, 082, 083, 085, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 173, 187, 188, 194, 206, 210, 214, 218, 219, 224, 227, 233, 238, 244, 247, 250, 251, 252, 263, 266, 268, 269, 273, 275, 276, 279, 283, 285, 286, 291, 293, 294, 295, 296, 297, 298, 301, 302, 309, 310, 312, 313, 314, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 337, 338, 339, 340, 342, 343, 344, 345, 346, 348, 349, 350, 351, 352, 354, 355, 356, 357, 358, 359, 360, 363, 364, 365, 371, 374, 375, 377, 385, 386, 387, 390, 396, 399, 401, 404, 414, 415, 419, 420, 421.
 
-Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; python-chess pour 348 à 357 ; un compilateur C pour le 224, le 244, le 343 et le 350.
+Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; python-chess pour 348 à 357 ; un compilateur C pour le 224, le 244, 321 à 325, 328, 334, 335, 342, 343, 344 et le 350.
 
 > ⚠️ **Ces dossiers contiennent les réponses.** Sur le blog, la solution n’arrive qu’en commentaire, quelques jours après l’article.
 
@@ -665,6 +665,22 @@ Les gemmes sur les quatre premières cases de la grande diagonale. Parmi les 1 1
 | `291/grand_lama.py` | Filtre les découpes selon les gemmes, tableau des 70 dispositions. Témoins : une spirale « simple » et la part du livre retouchée d'une case sont refusées. Environ 1 s. |
 | `291/quatre_cavaliers.py` | L'inventaire des découpes en moulin, partagé avec le 339. |
 
+## 293 · THE CHINESE CHESSBOARD : dix-huit, et la preuve tient dans une addition
+
+Morceaux colorés à rotation près (pas de retournement) : 2 d'une case, 1 de deux, 4 de trois, 10 de quatre, 36 de cinq. Les 17 plus petits couvrent 56 cases, 18 en couvrent 61, 19 en couvriraient 66 > 64 : au plus **18** morceaux. Le plus grand morceau d'un découpage en 18 a au plus 8 cases (64 − 56), comme le dit Dudeney ; et un maximum de 5 cases est le plus petit possible. Huit répartitions de tailles seulement ; toutes ont les deux carrés seuls et au moins sept morceaux de quatre cases. Ses deux découpages, relevés dans le texte du corrigé, ont bien 18 morceaux tous différents.
+
+| Fichier | Rôle |
+|---|---|
+| `293/chinois.py` | Énumération des morceaux colorés, borne, répartitions, contrôle des deux découpages (relus dans `corrige293.txt`). Témoin : le premier découpage avec une coupe effacée est refusé. Instantané. |
+
+## 294 · THE CHESSBOARD SENTENCE : 124 assemblages, et une coupe oubliée dans le texte de Gutenberg
+
+Les quatorze pièces de « .CUT.THY.LIFE. », relevées sur la gravure (couleurs comprises, 32 cases de chaque couleur), s'assemblent en échiquier de **124** façons en les tournant (62 à demi-tour près), 616 si l'on peut les retourner. Le corrigé redessiné en caractères par Project Gutenberg n'a que 13 pièces : il y manque la coupe entre un point et le Y. Avec elle, c'est l'unique assemblage compatible avec ses traits, celui de la gravure.
+
+| Fichier | Rôle |
+|---|---|
+| `294/phrase.py` | Pavage exact (première case libre), comptages, comparaison avec `corrige294.txt`. Témoin : le découpage du texte tel quel n'est pas un assemblage valide. Environ 2 s. |
+
 ## 295 · THE EIGHT ROOKS : le nombre qu'il disait « pas encore déterminé »
 
 Huit tours qui tiennent tout l'échiquier sans qu'aucune en garde une autre : 8! = 40 320, comme au corrigé. Son « évidemment une tour par rangée et par colonne » est contrôlé par l'essai complet sur les damiers de 2 à 6. Le compte à retournements et réflexions près, qu'il déclare non déterminé et difficile, est **5 282**, obtenu deux fois : en rangeant les dispositions par familles, et par le lemme de Burnside (40 320, 12, 384, 12, 0, 0, 764 et 764 dispositions fixes). Diviser par huit ne marche pas : 44 familles n'ont que deux membres, 418 en ont quatre. Suite de 1 à 8 cases de côté : 1, 1, 2, 7, 23, 115, 694, 5 282.
@@ -705,6 +721,14 @@ Des 92 solutions des huit dames, 12 évitent les deux grandes diagonales (32 en 
 |---|---|
 | `301/etoiles.py` | Filtrage des 92 solutions, familles, carte des cases, autres tailles. Témoins : une solution des huit dames qui touche une diagonale est écartée, une disposition qui s'attaque aussi. Instantané. |
 
+## 302 · A PROBLEM IN MOSAICS : deux pavages, puis neuf, et vingt carreaux à déplacer au lieu de cinquante-six
+
+Six couleurs complètes = six solutions disjointes des huit dames, plus deux groupes de sept (jaune et pourpre). Bouches d'aération aux coins du bas : **2** pavages, qui ne diffèrent que par l'échange jaune/pourpre de la septième rangée, comme le dit Dudeney. Bouches sur les cases encadrées : **9** pavages, dont celui du corrigé. Celui-ci ne laisse que 6 carreaux en place ; le meilleur choix (pavage et attribution des couleurs) en laisse 42 : 20 déplacements suffisent.
+
+| Fichier | Rôle |
+|---|---|
+| `302/mosaique.py` | Recherche par les 92 solutions des huit dames, contrôle du pavement de l'énoncé et de celui du corrigé (relevé sur la gravure), meilleur réemploi. Témoin : deux carreaux échangés dans le corrigé sont refusés. Instantané. |
+
 ## 309 · THE FORTY-NINE COUNTERS : quatre découpages en tout
 
 Son carré est valable (jamais deux lettres ni deux chiffres pareils sur une ligne, une colonne ou une diagonale, petites diagonales comprises). Chaque lettre y occupe une solution des sept dames. Sur les 40 solutions des sept dames, il n'y a que **4** façons d'en prendre sept qui recouvrent le damier ; dans chacune, une lettre se décale du même nombre de colonnes (2, 3, 4 ou 5) à chaque rangée. Lettres et chiffres compatibles : 12 couples, soit 304 819 200 carrés en nommant lettres et chiffres de toutes les façons. Le sien : lettres au pas de 2, chiffres au pas de 4. Damiers de 4, 6 et 8 : aucun découpage ; de 5 : deux.
@@ -720,6 +744,14 @@ Trois moutons sur seize enclos, chaque enclos occupé ou en ligne avec un mouton
 | Fichier | Rôle |
 |---|---|
 | `310/moutons.py` | Essai complet des dispositions, familles, avec et sans écran. Témoins : C E L et le couple A, P sont refusés ; l'exemple de la gravure (D, E, O) est accepté. Instantané. |
+
+## 312 · THE FIVE CRESCENTS OF BYZANTIUM : unique à symétrie près
+
+4 860 façons de placer cinq croissants qui surveillent tout (domination par cinq dames) ; aucune avec quatre. Tapis posé droit : jamais plus de 5 × 5. Tapis à 45°, sommets au milieu des bords (aire 32, la moitié) : **4** placements, images l'un de l'autre, dont celui de Dudeney. Ses phrases sur les tapis de « près de 29 dalles » et sur le maximum absolu ne sont pas examinées (autres angles).
+
+| Fichier | Rôle |
+|---|---|
+| `312/croissants.py` | Énumération des placements, tapis droits, tapis à 45°, cas de quatre croissants. Témoin : un placement surveillant tout mais sous le tapis est refusé. Environ 15 s. |
 
 ## 313 · QUEENS AND BISHOP PUZZLE : Wallis et Planck avaient les seules, et le fou de la fig. 2 se trompe
 
@@ -739,6 +771,53 @@ La croix de départ laisse exactement les 10 étoiles pointées de la gravure. C
 | `314/croix_du_sud.py` | Toutes les dispositions à cinq planètes, familles, solutions du casse-tête. Témoins : la croix de départ et sa solution privée d'une planète sont refusées. Environ 2 s. |
 | `314/croix_du_sud2.py` | Carrés de 9 à 12 : un exemple, ou 0 après recherche complète ; chaque exemple est recontrôlé à part. Témoin : l'exemple du 11 × 11 ne couvre pas le 12 × 12. Environ 35 s. |
 
+## 321 · THE ROOK'S JOURNEY : un seul trajet
+
+Trajets de tour case par case depuis h8, en coups (lignes droites) : avec le 10ᵉ coup en d1 et le 21ᵉ en b1, **un seul** trajet, celui du corrigé. Sans la condition sur la case 10, 14 trajets.
+
+| Fichier | Rôle |
+|---|---|
+| `321/tour.c` | Recherche exhaustive des chemins du quadrillage (coupure de connexité), coups comptés en lignes droites ; sert aussi à 322 et 324. |
+| `321/trajet.py` | Contrôle indépendant d'un trajet (cases, pas, lignes). |
+| `321/controle.py` | Compile, cherche, contrôle. Témoin : le trajet avec deux cases échangées est refusé. Environ une minute (`rapide` : sans le décompte sans case 10). |
+
+## 322 · THE LANGUISHING MAIDEN : l'aller-retour est obligatoire, et vingt-deux est un minimum
+
+Entrée a8 et demoiselle g2 sont de même couleur : aucun chemin simple. Avec l'aller-retour du corrigé (a7 ou b8, puis retour en a8) : aucun trajet en 21 lignes, 28 en 22 pour chaque voisin (56, symétriques deux à deux par la diagonale a8-h1, où se trouve g2).
+
+| Fichier | Rôle |
+|---|---|
+| `322/tour.c` | Le chercheur de 321, mode aller-retour. |
+| `322/controle.py` | Compte, contrôle chaque trajet indépendamment. Témoin : un trajet amputé de sa dernière case est refusé ; `parite` ajoute la recherche sans aller-retour (aucun trajet, six minutes). Environ une minute. |
+
+## 323 · A DUNGEON PUZZLE : cinquante-sept, d'où qu'on parte
+
+Depuis la cellule du prisonnier (e1) : aucun chemin à 58 lignes, **10** à 57. Depuis les dix cases représentatives de l'échiquier, jamais plus de 57 : la phrase « aucun trajet de tour ne peut dépasser ce nombre » est vraie. Depuis b2, c2, d2, d4 (et leurs symétriques), 57 n'est pas atteint.
+
+| Fichier | Rôle |
+|---|---|
+| `323/cachot.c` | Chemins avec au plus k pas « tout droit » (63 − k lignes), coupure de connexité. |
+| `323/controle.py` | Compile, compte, contrôle des chemins trouvés. Témoin : un chemin qui saute une cellule est refusé. Environ 45 s. |
+
+## 324 · THE LION AND THE MAN : 136 couples
+
+Trajets a1 → h8 en lignes droites, avec l'aller-retour (coins de même couleur) : aucun en 21, **28** en 22. Le lion prend un trajet de l'homme tourné d'un demi-tour : 784 couples, 164 sans rencontre (ni même cellule, ni croisement dans une porte), dont **136** avec au moins un coup d'œil (même rangée ou colonne au même instant). Le trajet de l'homme simplement retourné pour le lion ne donne jamais de coup d'œil, comme le dit Dudeney.
+
+| Fichier | Rôle |
+|---|---|
+| `324/tour.c` | Le chercheur de 321. |
+| `324/lion.py` | Simulation pas à pas de tous les couples. |
+| `324/controle.py` | Compile, produit `homme.txt`, lance la simulation. Témoin : deux fois le même trajet est signalé comme rencontre. Environ 40 s. |
+
+## 325 · AN EPISCOPAL VISITATION : dix-sept, et la règle des cases voisines est indispensable
+
+Recherche exhaustive (coupure : chaque case blanche du bord termine un coup) : aucune tournée en 16 coups, **16** en 17, toutes d'un coin blanc à l'autre (8 depuis a8, 4 à reflet près ; celles de h1 sont les mêmes à l'envers). Un coin blanc n'a qu'une arête : il ne peut être que le début ou la fin. Sans l'interdiction de repasser entre deux mêmes cases, 16 coups suffisent.
+
+| Fichier | Rôle |
+|---|---|
+| `325/eveque.c` | Recherche exhaustive, avec ou sans la règle. |
+| `325/controle.py` | Compile, compte, contrôle indépendant de chaque tournée. Témoin : une tournée en 16 trouvée sans la règle est refusée avec la règle. Quelques secondes. |
+
 ## 326 · A NEW COUNTER PUZZLE : ses 18 coups sont un minimum
 
 Sa suite de 18 glissades est valable et minimale (il ne le revendique pas) ; il y a 256 suites minimales. La recherche en largeur visite les 99 positions atteignables.
@@ -755,6 +834,52 @@ Sa partie de 36 coups (18 par camp, en alternant) est valable et minimale ; il y
 |---|---|
 | `327/jetons_et_fous.py` | Le même programme que le 326. Témoins : un coup qui n'est pas un coup de fou, et ses deux premiers coups blancs intervertis, sont refusés. Environ 1 s. |
 
+## 328 · THE QUEEN'S TOUR : dix familles, un parcours depuis J, et un indice seulement pour G, I, J
+
+Les huit symétries du carré répartissent les 64 cases en **10** familles. Une recherche au hasard guidée trouve un parcours de 14 coups depuis d5 (J) et des tours fermés de 14 coups depuis A, B, C, D, E, F et H ; aucun depuis G, I ou J en 100 millions d'essais chacun, ce qui va dans le sens de Dudeney sans le prouver. Les tracés de Loyd et du corrigé n'ont pas été relevés.
+
+| Fichier | Rôle |
+|---|---|
+| `328/dame_hasard.c` | Recherche au hasard guidée (graine fixe). |
+| `328/etoiles.py` | Rejeu d'un tracé, cases couvertes. |
+| `328/controle.py` | Familles, parcours depuis J, tours depuis A à F. Témoin : le parcours privé de son dernier coup ne couvre plus tout. Environ 10 s ; `long` ajoute H, G, I, J (une vingtaine de minutes). |
+
+## 329 · THE STAR PUZZLE : quatorze traits, une seule oblique
+
+Le tracé du corrigé, relevé sur la gravure et vérifié par superposition : 14 traits d'une étoile blanche à l'autre, 64 étoiles rayées, un seul trait oblique (le dernier). L'affirmation « impossible avec les seuls coups de dame » n'est pas examinée.
+
+| Fichier | Rôle |
+|---|---|
+| `329/etoiles.py` | Rejeu d'un tracé. |
+| `329/controle.py` | Le tracé du corrigé. Témoin : sans son avant-dernier virage, il échoue. Instantané. |
+
+## 330 · THE YACHT RACE : quatorze bords, le septième au drapeau
+
+Le tracé numéroté du corrigé, rejoué : 14 bords, retour au mouillage, 64 bouées, le 7ᵉ finit au drapeau ; deux bords obliques (le 1ᵉʳ et le 13ᵉ). Le numéro du coin en bas à droite, gravé comme un 2, ne peut être qu'un 3.
+
+| Fichier | Rôle |
+|---|---|
+| `330/etoiles.py` | Rejeu d'un tracé. |
+| `330/controle.py` | Le tracé du corrigé. Témoin : sans son avant-dernier virage, il échoue. Instantané. |
+
+## 331 · THE SCIENTIFIC SKATER : deux virages hors du carré
+
+Le tracé du corrigé, rejoué : 14 lignes de dame, retour au point de départ (hors du carré, à droite de la rangée du haut), 64 étoiles ; un second virage hors du carré, à droite de la rangée du bas. Les « trois ou quatre façons » ne sont pas comptées.
+
+| Fichier | Rôle |
+|---|---|
+| `331/etoiles.py` | Rejeu d'un tracé. |
+| `331/controle.py` | Le tracé du corrigé. Témoin : sans son avant-dernier virage, il échoue. Instantané. |
+
+## 332 · THE FORTY-NINE STARS : douze traits
+
+Le tracé du corrigé, relevé et superposé à la gravure : 12 traits de dame sans sortir du carré, d'une étoile noire à l'autre, 49 étoiles. Onze traits ne sont pas exclus : une longue recherche au hasard n'en a pas trouvé, ce n'est pas une preuve.
+
+| Fichier | Rôle |
+|---|---|
+| `332/etoiles.py` | Rejeu d'un tracé. |
+| `332/controle.py` | Le tracé du corrigé. Témoin : sans son avant-dernier virage, il échoue. Instantané. |
+
 ## 333 · THE QUEEN'S JOURNEY : il a raison, au centième de pouce
 
 Sur les 718 948 trajets de cinq coups permis, le plus long est le sien, seul, d1-h1-a8-h8-h2-c7 = 34 + 24√2 = 67,94 pouces ; le deuxième, seul aussi, est celui « de la plupart », d1-h1-h8-a1-a8-g8 = 48 + 14√2 = 67,80 ; le troisième est sous 67. L'écart vaut 10√2 − 14. Sans la règle du croisement, on dépasserait 73 pouces. En quatre coups, le début du trajet « de la plupart » est le meilleur, et seul. De toutes les cases de départ, d1 et e1 (et leurs six images) sont les pires ; d'un coin, on gagne six pouces.
@@ -762,6 +887,26 @@ Sur les 718 948 trajets de cinq coups permis, le plus long est le sien, seul, d1
 | Fichier | Rôle |
 |---|---|
 | `333/voyage_dame.py` | Tous les trajets, avec et sans la règle du croisement ; trajets plus courts ; les 64 cases de départ. Témoin : le trajet le plus long sans la règle doit être absent de la recherche avec la règle. Environ 1 min. |
+
+## 334 · ST. GEORGE AND THE DRAGON : 163 578 772 chemins
+
+Chemins de cavalier sur 7 × 7, de d4 au dragon en b2, passant une fois sur chaque case : **163 578 772** (énumération complète, coupure sur les cases sans issue). Centre et dragon sont de même couleur (48 sauts) ; sur b3, aucun chemin. Le dessin du corrigé n'est pas relevé.
+
+| Fichier | Rôle |
+|---|---|
+| `334/cavalier7.c` | Énumération des chemins de cavalier, étapes facultatives. |
+| `334/cavalier.py` | Contrôle indépendant d'un chemin. |
+| `334/controle.py` | Un chemin trouvé et contrôlé. Témoin : le chemin à la fin déplacée est refusé. Instantané ; `compte` refait le décompte (une quarantaine de minutes). |
+
+## 335 · FARMER LAWRENCE'S CORNFIELDS : 54 020 moissons
+
+Avec les étapes 1 = a7, 13 = a1, 25 = d4, 37 = g7, 49 = g1 : **54 020** chemins de cavalier. Les cinq étapes sont de même couleur, comme l'exigent les douze sauts entre deux étapes. Le dessin du corrigé n'est pas relevé.
+
+| Fichier | Rôle |
+|---|---|
+| `335/cavalier7.c` | Le même chercheur qu'en 334, avec étapes et coupure sur la distance à l'étape suivante. |
+| `335/cavalier.py` | Contrôle indépendant. |
+| `335/controle.py` | Compte et contrôle le premier chemin. Témoin : deux parcelles échangées sont refusées. Quelques secondes. |
 
 ## 337 · THE FOUR KANGAROOS : un seul partage de chaque moitié
 
@@ -787,6 +932,25 @@ Le quart 4 × 4 ne porte ni tour ni parcours. Sur les 1 191 découpes en moulin 
 |---|---|
 | `339/quatre_cavaliers.py` | Inventaire des découpes, tours fermés et parcours ouverts. Témoins : le carré 4 × 4, et sa part avec une case déplacée, sont refusés. Environ 1 s. |
 
+## 340 · THE CUBIC KNIGHT'S TOUR : le tour existe, quelle que soit la convention aux coins
+
+Les 384 cases des six faces, les sauts passant d'une face à l'autre par dépliage. Près d'un coin du cube, un saut peut dépendre de l'ordre des branches du L : on prend soit les deux arrivées, soit seulement les sauts sans ambiguïté. Dans les deux cas, la règle de Warnsdorff (départs au hasard) trouve un tour fermé. Vandermonde s'appelait Alexandre-Théophile (1735-1796), pas « Abnit » (1736-1793).
+
+| Fichier | Rôle |
+|---|---|
+| `340/cube.py` | Construction du graphe, recherche d'un tour fermé, contrôle. Témoin : le tour avec deux cases échangées est refusé. Une demi-minute (`prudent` : sauts sans ambiguïté). |
+| `340/controle.py` | Les deux conventions. |
+
+## 342 · THE MANDARIN'S PUZZLE : trente, deux solutions, et elles bougent le 6 ou le 15
+
+La table est une croix de 25 cases (relevée sur la gravure, contrôlée sur les deux exemples de l'énoncé). IDA* avec une heuristique admissible : **30** coups au minimum, 32 sans toucher aux jetons en place. Exactement **2** solutions en 30, l'une bouge le 6, l'autre le 15 (« the 6, or the 15 ») ; 11 solutions en 32 sans les toucher. Sa suite de 30 coups range bien les jetons.
+
+| Fichier | Rôle |
+|---|---|
+| `342/mandarin.c` | IDA*, avec ou sans les jetons en place. |
+| `342/compte.c` | Toutes les solutions d'une longueur donnée. |
+| `342/controle.py` | Compile, contrôle les nombres, rejoue sa suite. Témoin : sa suite privée d'un coup est refusée. Instantané. |
+
 ## 343 · EXERCISE FOR PRISONERS : 42 coups au lieu de 66
 
 Un taquin de quinze prisonniers à ranger en parcours de cavalier, coin inférieur droit vide, avec le plus d'hommes possible au repos et le moins de coups possible. Les comptes de Dudeney sont exacts (80 arrangements, 40 atteignables, 2 hommes au repos au plus), mais sa liste de paires contient une coquille (5-13 au lieu de 5-15), il ne trouve que 4 des **9** cibles, et ses **66** coups sont battus : **42** suffisent, et 42 est optimal.
@@ -807,6 +971,17 @@ python3 rejeu.py
 ```
 
 Correction du 18/10/2026 : la première version de `taquin.c` comptait 2 coups de plus par paire de tuiles inversées dans une ligne, ce qui surestime quand trois tuiles sont inversées. `controle_taquin.py` l'a pris en défaut (3 positions sur 300 résolues en 18 coups au lieu de 16). Le calcul corrigé redonne les mêmes nombres pour les 9 cibles, dont 42.
+
+## 344 · THE KENNEL PUZZLE : ses 46 coups sont justes ; le minimum reste ouvert
+
+Sa suite de 46 coups est valide et forme sa chaîne (chiens 1, 5, 10, 15 et 20 immobiles). 164 chaînes de cavalier orientées sur les 20 niches du haut ; la sienne a une borne (somme des distances) de 36, une autre de 32. Recherche exacte pour sa chaîne : rien en 40 coups ou moins, donc minimum entre 42 et 46 (parité). Une recherche approchée sur les meilleures chaînes ne descend pas sous 46.
+
+| Fichier | Rôle |
+|---|---|
+| `344/chenil.py` | Rejeu, chaînes, bornes. Témoin : sa suite privée d'un coup est refusée. |
+| `344/chenil.c` | IDA* pour une chaîne donnée. |
+| `344/glouton.py` | A* pondéré sur les chaînes de borne < 46 (plusieurs minutes). |
+| `344/controle.py` | Rejeu, chaînes, recherche exacte jusqu'à 40. Témoin : la recherche trouve un cas à un coup. Quelques secondes. |
 
 ## 345 · THE TWO PAWNS : 2 100, retrouvé sans sa méthode
 
@@ -856,6 +1031,14 @@ Sa partie, rejouée avec python-chess : un seul cavalier blanc joue, quinze pris
 | Fichier | Rôle |
 |---|---|
 | `351/croise.py` | Rejeu de la partie, recherche exhaustive des mats en deux et trois. Témoins : la partie avec un coup illégal est refusée ; 17. e4 ne force pas le mat en trois. Instantané. |
+
+## 352 · IMMOVABLE PAWNS : dix-sept coups, rejoués
+
+Sa partie (les Noirs jouant en miroir) est légale et aboutit à la position de la gravure en 17 coups. Seuls les cavaliers franchissent les rangées de pions ; le minimum qu'il affirme n'est pas démontré ici.
+
+| Fichier | Rôle |
+|---|---|
+| `352/pions.py` | Rejeu avec python-chess. Témoin : sans les coups de dame, la position n'est pas atteinte. Instantané. |
 
 ## 354 · AN AMAZING DILEMMA : b2, et sa jumelle g7
 
