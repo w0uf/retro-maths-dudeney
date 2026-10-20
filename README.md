@@ -2,7 +2,7 @@
 
 La série *Rétro Math’s* du blog [blog.site2wouf.fr](https://blog.site2wouf.fr/) reprend un par un les 430 problèmes d’*Amusements in Mathematics* de Henry Ernest Dudeney (Londres, 1917 ; texte sur [Project Gutenberg](https://www.gutenberg.org/ebooks/16713)).
 
-Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 032, 046, 056, 060, 065, 078, 079, 081, 082, 083, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 188, 194, 206, 210, 218, 219, 224, 227, 238, 244, 247, 250, 252, 263, 266, 268, 269, 275, 276, 279, 283, 286, 291, 295, 296, 297, 298, 301, 309, 310, 313, 314, 326, 327, 333, 337, 338, 339, 343, 345, 346, 348, 349, 350, 351, 354, 355, 356, 357, 358, 359, 360, 363, 365, 371, 375, 377, 385, 387, 390, 396, 401, 404, 414, 415, 419.
+Quand un épisode affirme un résultat obtenu par programme, le programme est ici, avec de quoi le refaire. Un dossier par problème : 001, 018, 025, 032, 044, 046, 056, 060, 061, 063, 065, 071, 078, 079, 081, 082, 083, 085, 086, 088, 090, 093, 094, 101, 111, 118, 127, 128, 130, 132, 134, 136, 137, 140, 142, 150, 152, 157, 161, 164, 173, 187, 188, 194, 206, 210, 214, 218, 219, 224, 227, 233, 238, 244, 247, 250, 251, 252, 263, 266, 268, 269, 273, 275, 276, 279, 283, 285, 286, 291, 295, 296, 297, 298, 301, 309, 310, 313, 314, 326, 327, 333, 337, 338, 339, 343, 345, 346, 348, 349, 350, 351, 354, 355, 356, 357, 358, 359, 360, 363, 364, 365, 371, 374, 375, 377, 385, 386, 387, 390, 396, 399, 401, 404, 414, 415, 419, 420, 421.
 
 Python 3 ; Pillow et NumPy pour 130, 142, 157 et 275 ; shapely pour le 152 ; OR-Tools pour le solveur du 252 ; python-chess pour 348 à 357 ; un compilateur C pour le 224, le 244, le 343 et le 350.
 
@@ -24,6 +24,14 @@ Le nombre de marchandes est le nombre de diviseurs de la recette en farthings. A
 |---|---|
 | `018/marchandes.py` | Diviseurs des deux recettes, variantes en demi-livres et quarts, balayage de la tranche. Témoins : 12 doit avoir six diviseurs, 13 deux. Instantané. |
 
+## 025 · CHINESE MONEY : une seule façon pour la demi-couronne, neuf pour la couronne
+
+La phrase qui se mord la queue, c = 2 + 4c/15, donne c = 30/11 penny : la demi-couronne vaut 11 ching-changs. En onzièmes de ching-chang, les pièces valent 15, 16 et 17, et 15r + 16s + 17t = 121 n'a qu'une solution : sept rondes et une carrée. Pour la couronne (242), neuf façons, dont six emploient les trois sortes.
+
+| Fichier | Rôle |
+|---|---|
+| `025/ching_chang.py` | Résolution de l'équation, énumération complète. Témoins : huit pièces rondes ne font pas le compte ; une recherche qui oublierait les triangulaires ne trouverait qu'une façon pour la couronne. Instantané. |
+
 ## 032 · THE EXCURSION TICKET PUZZLE : son nombre exige le double florin
 
 Payer 19 s 9 d (948 farthings) avec la monnaie courante du royaume : Dudeney annonce 458 908 622 façons sans donner sa méthode. On ne retrouve son nombre qu'en comptant le **double florin** (4 s, frappé de 1887 à 1890, jamais démonétisé) ; sans lui, on obtient 357 549 696. Son tableau de la monnaie rendue (douze pièces, du farthing au souverain) est exact aux douze lignes, et sa formule (n + 1)² pour le bronze aussi.
@@ -31,6 +39,14 @@ Payer 19 s 9 d (948 farthings) avec la monnaie courante du royaume : Dudeney ann
 | Fichier | Rôle |
 |---|---|
 | `032/billets.py` | Programmation dynamique sur les farthings, pour plusieurs jeux de pièces ; sa formule du bronze ; son tableau. Témoins : le calcul est recoupé par une énumération directe sur de petites sommes, et une version fautive (qui compte les ordres de paiement) doit être refusée. Environ 1 s. |
+
+## 044 · A CENSUS PUZZLE : deux lectures, deux réponses
+
+Quatorze intervalles d'un an et demi : 21 ans d'écart. « Sept fois plus âgée » au sens de Dudeney (plus âgée de sept fois l'âge de Johnnie) : 24 et 3 ans ; au sens d'aujourd'hui (sept fois l'âge) : 24 ½ et 3 ½. Dans les deux lectures, Ada a le double de l'âge de Johnnie à 42 ans (dans 18 ans, ou 17 ½).
+
+| Fichier | Rôle |
+|---|---|
+| `044/recensement.py` | Les deux lectures, en fractions exactes. Instantané. |
 
 ## 046 · MARY AND MARMADUKE : aucune solution en mois entiers
 
@@ -63,6 +79,22 @@ Les aiguilles des heures et des minutes se superposent onze fois en douze heures
 |---|---|
 | `060/montre.py` | Les onze superpositions en fractions exactes, contrôle des angles. Témoin : 4 h 21 min 49 s pile ne doit pas passer le contrôle. Instantané. |
 
+## 061 · CHANGING PLACES : 36 échanges, et le IX frôlé à 15/143 de minute
+
+Chaque couple d'heures (a, b), a ≠ b, donne exactement un échange : p = (720b + 60a)/143. Entre 15 h et minuit, 36 échanges (les 8 cas a = b sont des superpositions). L'aiguille des minutes est au plus près du IX à 11 h 44 + 128/143 min, associée à 8 h 58 + 106/143 min, à 15/143 de minute du IX : aucun des 72 instants n'en approche davantage.
+
+| Fichier | Rôle |
+|---|---|
+| `061/echanges.py` | Calcul exact en fractions des 72 instants. Témoin : en comptant les superpositions, on trouverait 45 et non 36. Instantané. |
+
+## 063 · THE STOP-WATCH : le même écart revient en miroir, et l'équidistance est impossible
+
+La montre s'est arrêtée à 9 h 5 + 5/11 min, trotteuse à 27 + 3/11 s ; écarts 109 + 1/11°, 120°, 130 + 10/11°. En essayant les douze dispositions possibles des trois écarts, on ne trouve sur douze heures que deux instants : celui-là et 2 h 54 + 6/11 min (trotteuse à 32 + 8/11 s), image du premier dans un miroir, 5 h 49 + 1/11 min plus tard. L'équidistance exacte (120°, 120°, 120°) n'arrive jamais, comme l'affirme Dudeney sans le démontrer.
+
+| Fichier | Rôle |
+|---|---|
+| `063/chronometre.py` | Résolution exacte des congruences pour toutes les dispositions des écarts. Témoin : 4 h 00 ne redonne pas les écarts de la gravure. Instantané. |
+
 ## 065 · THE RAILWAY STATION CLOCK : deux réponses, et un parallélisme impossible
 
 Les aiguilles sont opposées et parallèles à une diagonale d'un mur de 71 pi 9 po sur 10 pi 4 po. Elles sont opposées onze fois en douze heures ; **deux** de ces instants conviennent, images l'un de l'autre dans un miroir (le mur a deux diagonales), et Dudeney n'en donne qu'un. Surtout, le parallélisme ne peut pas être exact : il faudrait hauteur/longueur = tan(π/22), irrationnel (théorème de Niven). Son mur s'en approche à 48,6 secondes d'arc.
@@ -70,6 +102,14 @@ Les aiguilles sont opposées et parallèles à une diagonale d'un mur de 71 pi 9
 | Fichier | Rôle |
 |---|---|
 | `065/horloge.py` | Les onze instants en fractions exactes, l'écart à la diagonale, la hauteur exacte qu'il faudrait, la marge de tolérance. Témoin : un mur carré ne doit désigner aucun instant. Instantané. |
+
+## 071 · SIR EDWYN DE TUDOR : soixante milles, douze à l'heure
+
+d/10 − d/15 = 2 donne 60 milles et 5 heures de route juste ; l'allure est la moyenne harmonique de 10 et 15, soit 12 milles à l'heure, et non 12 ½. Elle reste 12 quelle que soit l'avance (égale au retard) ; sinon, c'est une moyenne harmonique pondérée.
+
+| Fichier | Rôle |
+|---|---|
+| `071/edwyn.py` | Résolution en fractions, cas généraux. Témoin : à 12 ½ milles à l'heure, on n'arrive pas à l'heure. Instantané. |
 
 ## 078 · ODD AND EVEN DIGITS : sa somme est la seule
 
@@ -110,6 +150,14 @@ Les chiffres 1 à 9, chacun une fois, en deux multiplications de même produit ;
 | Fichier | Rôle |
 |---|---|
 | `083/multiplication.py` | Toutes les permutations des neuf chiffres, coupées en quatre nombres de toutes les façons ; répartition des sommes ; ses deux réponses. Témoins : une égalité qui n'emploie pas les neuf chiffres doit être refusée. Environ 6 s. |
+
+## 085 · THE CAB NUMBERS : son « je crois » est exact
+
+Sur les 1 625 façons de couper les neuf chiffres en deux facteurs dont le produit emploie aussi les neuf chiffres, le plus grand produit est bien 96 × 8 745 231 = 839 542 176, celui de Dudeney (« I think »). Les deux facteurs sont toujours multiples de 3. Sans exiger les neuf chiffres au produit, 9 642 × 87 531 irait plus haut.
+
+| Fichier | Rôle |
+|---|---|
+| `085/fiacres.py` | Toutes les permutations, toutes les coupes. Témoin : le produit 843 973 902, plus grand, n'emploie pas les neuf chiffres. Environ 10 s. |
 
 ## 086 · QUEER MULTIPLICATION : 87 solutions avec 6, et seuls 3, 6 et 9 marchent
 
@@ -301,6 +349,22 @@ Combien de morceaux, au plus, avec six coups droits dans une tranche de pomme de
 
 Que ce soit le maximum tient en une phrase : la n-ième coupe croise au plus les n − 1 précédentes, donc traverse au plus n morceaux et en ajoute au plus n.
 
+## 173 · MRS. PERKINS'S QUILT : onze morceaux, et une seule découpe
+
+Recherche exhaustive : 10 carrés ne suffisent pas ; 11 suffisent (côtés 7, 6, 6, 4, 3, 3, 2, 2, 2, 1, 1), et les 8 découpes trouvées sont les images d'une seule par rotation et retournement. Le programme redonne les valeurs connues des petits côtés (2 → 4, 3 → 6, 5 → 8, 7 → 9, 11 → 11). La méthode gloutonne donne 26 morceaux.
+
+| Fichier | Rôle |
+|---|---|
+| `173/quilt.py` | Pavage par la case libre la plus haute puis la plus à gauche, élagage par l'aire ; contrôle de la découpe décrite en commentaire. Témoin : avec la mauvaise borne (la place disponible à l'endroit courant), la recherche rend 12 au lieu de 11. Moins d'une seconde. |
+
+## 187 · THE MILKMAID PUZZLE : le symétrique du tabouret, confirmé au hasard
+
+Sur des prés tirés au hasard, le point de la berge qui minimise le trajet, cherché sans hypothèse, tombe sur celui de la construction de Dudeney (le symétrique du tabouret), à la sixième décimale, et les deux angles avec la berge sont égaux. Avec une haie en plus, la longueur minimale est celle du trait entre les deux symétriques.
+
+| Fichier | Rôle |
+|---|---|
+| `187/laitiere.py` | Minimisation numérique comparée à la construction. Témoins : un autre point de la berge donne un trajet plus long ; sans le symétrique du tabouret, la longueur diffère. Instantané. |
+
 ## 188 · THE BALL PROBLEM : le cube donne le même nombre que la sphère, et ce n'est pas un hasard
 
 Six boules autour d'une boule au sol, et une sphère de diamètre 6 a une aire égale à son volume (π disparaît). Le cube de côté 6 aussi : pour tout solide circonscrit à une sphère, V = S·r/3, donc aire = volume revient à un rayon inscrit de 3, quelle que soit la forme. Vérifié sur la sphère, le cube, le tétraèdre et l'octaèdre réguliers, le cylindre.
@@ -336,6 +400,14 @@ Dix pièces en cinq lignes droites de quatre. Une telle figure est un arrangemen
 | `210/verifie.py` | Contrôle indépendant des 14 307 figures du damier 13 × 13 : dix cases distinctes, cinq alignements de quatre et pas d'autre. Témoin : une pièce déplacée d'une case doit être refusée. |
 
 Réserve : le balayage s'arrête aux damiers de côtés 13 au plus.
+
+## 214 · THE SIX FROGS : 21 coups, et sa règle générale
+
+Sa suite (2, 4, 6, 5, 3, 1 trois fois, puis 2, 4, 6) renverse les six grenouilles en 21 coups, dont 15 sauts. Le parcours exhaustif donne pour 2 à 9 grenouilles 3, 5, 10, 16, 21, 31, 36, 50 coups, conformes à sa règle ((n² + n)/2 si n est pair, (n² + 3n)/2 − 4 sinon), avec toujours n(n − 1)/2 sauts, le nombre de couples. La recette pour 14 grenouilles fait bien 105 coups.
+
+| Fichier | Rôle |
+|---|---|
+| `214/grenouilles.py` | Parcours en largeur, rejeu des suites. Témoin : sa suite privée du dernier coup ne renverse pas l'ordre. Environ 10 s. |
 
 ## 218 · THE VICTORIA CROSS PUZZLE : six solutions en 18 coups, et sa curiosité des 28 coups ne coûte rien
 
@@ -374,6 +446,14 @@ Le solitaire anglais à 33 trous, trou central vide au départ, une seule bille 
 | `227/rejeu.py` | Rejoue les 19 coups de Dudeney et les 18 coups, saut par saut. Témoin : deux coups permutés doivent être refusés. |
 
 La solution a été trouvée par « rencontre au milieu » (recherche en arrière sur 6 coups depuis la bille finale, en avant sur 12 depuis le départ) ; ce programme de recherche n'a pas été conservé. Ce qui est établi ici, c'est que la suite de 18 coups est valide.
+
+## 233 · THE ECCENTRIC CHEESEMONGER : ses trois solutions, et 190 fins possibles
+
+Ses trois parties sont valables si une pile compte pour sa hauteur (elles échouent si une pile compte pour un). L'exploration complète des parties de douze coups trouve 190 dispositions finales sur 1 820, et 77 968 parties gagnantes ; ses trois fins en ont respectivement 11 200, 16 et 1 080. Quatre piles contiguës sont impossibles.
+
+| Fichier | Rôle |
+|---|---|
+| `233/fromager.py` | Rejeu, et exploration niveau par niveau. Témoin : sa première partie avec deux coups intervertis est refusée. Quelques secondes. |
 
 ## 238 · ARRANGING THE JAM POTS : dix-sept échanges, n moins le nombre de cycles
 
@@ -432,6 +512,14 @@ La carte se ramène à une grille 4 × 6, A et Z aux coins opposés, de même co
 | Fichier | Rôle |
 |---|---|
 | `250/grand_tour.py` | Coloriage, énumération des itinéraires, les 43 avec la faille, les circuits que le coloriage n'exclut pas. Témoin : vers le coin de l'autre couleur, le même compteur doit trouver des itinéraires (47). Instantané. |
+
+## 251 · WATER, GAS, AND ELECTRICITY : huit conduites oui, neuf jamais
+
+Le circuit W–A–G–B–E–C–W n'emploie que des conduites permises ; les trois restantes sont des cordes deux à deux entrelacées, qu'on ne peut répartir sur deux côtés : neuf conduites sont impossibles, huit toujours possibles. Le comptage d'Euler donne la même conclusion (18 < 20), et sur une bouée l'inégalité passe (18 ≥ 12).
+
+| Fichier | Rôle |
+|---|---|
+| `251/eau_gaz.py` | Contrôle des deux preuves. Témoin : un hexagone avec trois cordes courtes, non entrelacées, se dessine. Instantané. |
 
 ## 252 · A PUZZLE FOR MOTORISTS : 157 tronçons au lieu de 159
 
@@ -501,6 +589,14 @@ Quinze rameurs, sept jours, cinq canots de trois chaque jour, jamais deux fois l
 
 Le passage historique « le problème peut désormais être considéré comme généralement résolu » est discuté dans l'article : le cas général n'est démontré qu'en 1968 (Ray-Chaudhuri et Wilson).
 
+## 273 · THE ROUND TABLE : ses tables pour 4, 5 et 6 sont justes
+
+Personne n'est jamais assis deux fois entre les deux mêmes voisins : ses tables pour 4, 5 et 6 personnes le respectent. Recherche exhaustive : 1 emploi du temps pour 4 (à l'ordre près), 2 pour 5, qui se partagent les 12 tablées possibles, 36 pour 6 ; un pour 7 est trouvé. Pour 13 personnes : 66 repas.
+
+| Fichier | Rôle |
+|---|---|
+| `273/table_ronde.py` | Contrôle de ses tables et recherche des emplois du temps. Témoin : sa table pour 5 avec deux repas identiques est refusée. Environ 1 min. |
+
 ## 275 · THE SIXTEEN SHEEP : la série de Dudeney est complète, et ses dessins sont justes
 
 Seize moutons enfermés par neuf claies ; en déplaçant 2, 3, 4, 5, 6 puis 7 claies, il faut obtenir trois enclos de 6, 6 et 4 moutons. Dudeney donne six dessins, les claies déplacées en trait épais. Relus aux pixels sur la gravure de 1917, ils sont tous justes : neuf claies, enclos de 6, 6 et 4, et autant de traits épais que le numéro du dessin.
@@ -543,6 +639,14 @@ Les quinze dominos du double-quatre en ligne : 126 720 façons, par énumératio
 |---|---|
 | `283/dominos.py` | Énumération directe pour les doubles-deux, -trois et -quatre, les circuits du pentagone. Témoins : le double-deux doit donner 12, le double-trois 0 ; le faux facteur 2⁷ donnerait 465 835 130 880. Environ 3 s. |
 | `283/dominos28.py` | Comptage des circuits eulériens de K₅ et K₇ par programmation dynamique, puis insertion des doubles et rupture du cercle. Environ 1 s. |
+
+## 285 · THE FOUR POSTAGE STAMPS : 65 façons, cinq formes
+
+Quatre timbres qui tiennent par les côtés, sur une planche de 3 × 4 : 65 façons sur 495 groupes de quatre (« guère plus d'une cinquantaine », disait Dudeney) ; cinq formes (barre 3, carré 6, T 14, S 14, L 28), sept sans retournement. Sur une planche de 4 × 4 : 113.
+
+| Fichier | Rôle |
+|---|---|
+| `285/timbres.py` | Énumération complète, classement par formes. Témoin : le groupe 1, 2, 7, 8, qui ne tient que par un coin, est refusé. Instantané. |
 
 ## 286 · PAINTING THE DIE : 48 marquages, mais deux dés seulement
 
@@ -818,6 +922,14 @@ Un quart d'once d'alcool versé dans l'eau, puis un quart d'once du mélange rev
 |---|---|
 | `363/medecin.py` | Le calcul en fractions exactes, trois autres jeux de quantités, quatre compositions du retour. Témoin : si l'on ne reverse qu'un huitième d'once, l'égalité doit tomber. Le script de l'atelier ayant été perdu, celui-ci le refait. Instantané. |
 
+## 364 · THE BARREL PUZZLE : le plan passe par le centre
+
+Dans un tonneau renflé, le plan qui joint la lèvre au bord opposé du fond laisse 50,1 % du volume dessous, sur 400 000 points tirés au hasard : la moitié, à l'erreur de tirage près. Les poids de Bachet 1, 3, 9 et 27 pèsent tous les entiers de 1 à 40 sur deux plateaux.
+
+| Fichier | Rôle |
+|---|---|
+| `364/tonneau.py` | Tirage au hasard, énumération des pesées. Témoins : dans un verre évasé (sans centre), le même plan ne coupe pas en deux ; des masses 1, 2, 4, 8 laissent des doublons. Environ 3 s. |
+
 ## 365 · NEW MEASURING PUZZLE : onze est le minimum, et le second tonneau est indispensable
 
 Deux récipients de dix pintes pleins, une mesure de 5 et une de 4 : mettre 3 pintes dans chacune des deux mesures. Ses onze transvasements sont le minimum, et il y a exactement 11 solutions en onze coups (à l'échange des deux grands récipients près). Avec un seul grand récipient, de 10 ou de 20 pintes : impossible.
@@ -833,6 +945,14 @@ Deux récipients de dix pintes pleins, une mesure de 5 et une de 4 : mettre 3 pi
 | Fichier | Rôle |
 |---|---|
 | `371/lingots.py` | Remplissages vérifiés case par case sur une grille au demi-pouce, côtés possibles, preuves d'impossibilité, caisses rivales. Témoins : un lingot retiré, puis un lingot décalé, doivent faire échouer le remplissage. Instantané. |
+
+## 374 · CROSSING THE RIVER AXE : 13 traversées, 50 façons, 8 avec la condition forte
+
+Le parcours de toutes les situations (48) montre que 13 traversées sont un minimum, et qu'il y a 50 façons d'y arriver. Avec la condition plus forte (deux hommes laissés ensemble ne gardent pas plus que leurs deux parts), le minimum reste 13, mais il ne reste que 8 façons. Sa suite en fait partie.
+
+| Fichier | Rôle |
+|---|---|
+| `374/axe.py` | Parcours en largeur sous les deux conditions, rejeu de sa suite. Témoin : sa suite privée de la 6e traversée est refusée. Instantané. |
 
 ## 375 · FIVE JEALOUS HUSBANDS : onze traversées, et un seuil à quatre places
 
@@ -861,6 +981,14 @@ Deux piles de neuf cartes, quatre places vides ; une carte se pose sur une place
 | `385/rejoue.py` | Rejeu indépendant, coup par coup. Témoins : sans le dernier coup, deux coups intervertis qui dépendent l'un de l'autre, une carte posée sur une valeur non voisine, un coup de trop doivent être refusés ; deux coups indépendants intervertis doivent passer. |
 | `385/dudeney62.py` | Rejeu de sa partie de 62 coups, chaque bloc compté par le plus court chemin et comparé au sien. Témoin : un bloc compté 8 au lieu de 9 doit faire échouer le rejeu. |
 
+## 386 · A TRICK WITH DICE : retrancher 250
+
+Le total vaut 100a + 10b + c + 250 : sur 216 lancers, 216 totaux différents (361 à 916). À quatre dés, on retranche 2 500 (1 296 totaux distincts). Avec des dés de 0 à 9, mille totaux distincts, de 250 à 1 249, mais il faut lire 007 ou 042.
+
+| Fichier | Rôle |
+|---|---|
+| `386/des.py` | Énumération des lancers. Témoin : sans le × 10 final, deux lancers donnent le même total. Instantané. |
+
 ## 387 · THE VILLAGE CRICKET MATCH : sa réponse tient à une hypothèse muette
 
 Quatre courses apparemment complètes, « trois courtes » à chaque bout : Dumkins ne marque rien ; trois courses, « deux courtes » à chaque bout : Struggles marque un point. En essayant toutes les répartitions des arrivées bonnes et courtes, ses deux réponses sont les seules **si chaque batteur finit sa dernière course dans un pli**, ce que Dudeney suppose sans l'écrire. Sans cette condition, les annonces des arbitres laissent 16 façons de courir dans le premier cas, 9 dans le second, avec des issues différentes.
@@ -884,6 +1012,14 @@ Trente allumettes en trois tas, qui prend la dernière perd (Nim « misère ») 
 | Fichier | Rôle |
 |---|---|
 | `396/allumettes.py` | Le jeu calculé par récursion, la règle confrontée au calcul, le nombre de répartitions selon le total (1, 4, 13, 40 pour 6, 14, 30, 62), sa partie d'exemple. Témoins : (16, 13, 1) doit être perdante pour qui la laisse, et (1, 1) gagnante pour qui joue. Instantané. |
+
+## 399 · THE TROUBLESOME EIGHT : un paramètre, et le mot « nombre »
+
+Tout carré magique de somme 15 avec le 8 au milieu du haut s'écrit avec un paramètre a ; la force brute le confirme. En entiers positifs, aucun carré ; avec le zéro, a = 1 et son miroir ; en relatifs, une infinité ; avec des moitiés, deux carrés à un miroir près, dont celui de Dudeney (a = 4 ½). Les chiffres 1 à 9 donnent 8 carrés, le 8 toujours en coin.
+
+| Fichier | Rôle |
+|---|---|
+| `399/huit.py` | Famille paramétrée, force brute, valeurs interdites. Témoin : a = 4 donne un doublon. Instantané. |
 
 ## 401 · EIGHT JOLLY GAOL BIRDS : ses deux suites sont les seules
 
@@ -924,6 +1060,22 @@ Le déterminant de Cayley-Menger de cinq points deux à deux à la même distanc
 | Fichier | Rôle |
 |---|---|
 | `419/pennies.py` | Déterminants exacts (fractions). Témoins : quatre sommets d'un carré et cinq sommets d'un cube doivent donner 0. Instantané. |
+
+## 420 · THE INDUSTRIOUS BOOKWORM : trois pouces et demi
+
+En modélisant l'étagère (vu par le dos, le plat avant d'un livre occidental est à droite), le ver ne traverse que le tome II et quatre couvertures : 3 ½ pouces, et 26 ¼ pour dix volumes ; en général n − 2 volumes et 2n − 2 couvertures. Des livres japonais rangés à la japonaise donnent la même réponse ; rangés à l'occidentale, la réponse « pressée », 9 ½.
+
+| Fichier | Rôle |
+|---|---|
+| `420/ver.py` | Positions des pages sur l'étagère. Témoin : la réponse pressée est refusée pour une étagère ordinaire. Instantané. |
+
+## 421 · A CHAIN PUZZLE : sept maillons, 1 s. 9 d.
+
+Énumération complète par tronçon et programmation dynamique : six maillons ouverts ne suffisent jamais, sept oui, et d'une seule façon : ouvrir entièrement les tronçons de 3 et de 4, comme au corrigé. Coût 21 pence, contre 26 pour une chaîne neuve et 27 pour la méthode naïve.
+
+| Fichier | Rôle |
+|---|---|
+| `421/chaine.py` | Profil de chaque tronçon, programmation dynamique. Témoin : six maillons laissent trop de bouts. Instantané. |
 
 ## Licence
 
